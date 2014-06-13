@@ -1,0 +1,27 @@
+#login_container{
+	margin: auto;
+	width: 300px;
+	padding: 20px;
+	border-radius: 4px;
+	border: 1px dashed #aaa;
+}
+#register_container{
+	margin: auto;
+	width: 300px;
+	padding: 20px;
+	border-radius: 4px;
+	border: 1px dashed #aaa;
+}
+#log{
+	margin-top: 40px;
+}
+#log3{
+	margin-top: 40px;
+}
+#latest_container{
+	margin: auto;
+	width: 500px;
+	padding: 20px;
+	border-radius: 4px;
+	border: 1px dashed #aaa;
+}

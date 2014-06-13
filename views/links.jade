@@ -1,0 +1,20 @@
+extends index2
+block content
+	button(id="add",class="btn btn-warning") Add Link
+	form(action="/links",method="post",id="links2",style="display:none")
+		input(class='form-control input',name="title",placeholder="Title",required)
+		input(class='form-control input',name="url",placeholder="Add links here",required)
+		input(class='form-control input',name="category",id="ajcat",placeholder="Category",required)
+		div#catres
+		textarea(class="form-control input",rows="5",type='textbox',name='description',placeholder="Describe the contents of the link")
+		input(class='form-control input',name="tags",placeholder="tags   eg:coding, programming")
+		input(type="submit",value="Add",class="btn btn-warning")
+
+	ul
+		each item in items
+				li
+					h2(id="title")
+						a(href=item.url,class="btn btn-warning") 
+							=item.url
+					h4(id="description")
+						=item.description

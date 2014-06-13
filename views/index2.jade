@@ -1,0 +1,23 @@
+doctype html
+html
+	head
+	script(type="text/javascript",src='/javascripts/jquery-2.0.3.min.js')
+	script(type="text/javascript",src='/javascripts/script.js')
+	script(type="text/javascript",src='/javascripts/bar.js')
+	link(type="text/css",rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+	link(type="text/css",rel='stylesheet', href='/stylesheets/style.css')
+	title=title
+	body
+		navbar
+			ul(class="nav nav-pills")
+				li(id="home",class="but") 
+					a(href="/") Home										
+				li(id="profile",class="but")
+					a(href="/profile") Profile
+				li(id="category",class="but")
+					a(href="/category") Category
+				li(id="logout",class="btn but")
+					a(href="/logout") Logout
+
+		div(id="container")
+			block content

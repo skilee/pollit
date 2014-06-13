@@ -1,0 +1,6 @@
+extends index2
+block content
+	h2 #{category.title}
+	h3 #{category.description}
+	button(class="btn btn-warning")
+		a(href='/links/'+category.title) #{category.title} Links
