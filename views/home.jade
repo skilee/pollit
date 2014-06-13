@@ -2,11 +2,23 @@ extends index
 block content
 	div(id="latest_container")
 		h2 Latest Polls Come Here
-		div(id="poll_1")
-			h3 Poll Question
-			canvas(id="myCanvas",width="400px",height="30px")
-			br
-			button(id="up") Yes
-			p(id="upVal")
-			button(id="down") No
-			p(id="downVal")
+		div(id="poll")
+			ul
+				li
+					h3 Poll Question 1
+					canvas(id="myCanvas_0",width="400px",height="30px")
+					br
+					h4(id="upVal_0")
+					button(id="up_0") Yes
+					h4(id="downVal_0")
+					button(id="down_0") No
+					hr
+
+				li
+					h3 Poll Question 2
+					canvas(id="myCanvas_1",width="400px",height="30px")
+					br
+					h4(id="upVal_1")
+					button(id="up_1") Yes
+					h4(id="downVal_1")
+					button(id="down_1") No
