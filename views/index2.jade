@@ -10,14 +10,20 @@ html
 	body
 		navbar
 			ul(class="nav nav-pills")
-				li(id="home",class="but") 
+				li(id="home",class="bot_bor") 
 					a(href="/") Home										
-				li(id="profile",class="but")
+				li(id="profile",class="bot_bor")
 					a(href="/profile") Profile
-				li(id="category",class="but")
-					a(href="/category") Category
-				li(id="logout",class="btn but")
+				li(id="createpoll",class="bot_bor")
+					a(href="/create")	Create Poll
+				li(id="mypoll",class="bot_bor")
+					a(href="/mypolls")	My Polls
+				li(id="search",class="bot_bor")
+					input(class='form-control',placeholder="Search")
+					div(id="results")
+				li(id="logout",class="btn")
 					a(href="/logout") Logout
 
 		div(id="container")
+				img(src="/images/ajax-loader.gif",id="aj")
 			block content

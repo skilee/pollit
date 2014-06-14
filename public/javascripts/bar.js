@@ -17,15 +17,19 @@ $(function(){
 	}
 	Poll.prototype.draw=function(){
 		var ctx=this.ctx;
-		var colorUp="#bbbbbb";
-		var colorDown="#dddddd";
+		var colorUp="#666666";
+		var colorDown="#bbbbbb";
+		ctx.strokeStyle="#000000";
+		ctx.lineWidth=2;
 		var total=this.upVal+this.downVal;
 		ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		ctx.fillStyle=colorUp;
 		var widthRect1=widthFull*(this.upVal/total);
+		ctx.strokeRect(0,0,widthRect1,25);
 		ctx.fillRect(0,0,widthRect1,25);
 		var widthRect2=widthFull*(this.downVal/total);
 		ctx.fillStyle=colorDown;
+		ctx.strokeRect(widthRect1,0,widthFull,25)
 		ctx.fillRect(widthRect1,0,widthFull,25)
 	}
 

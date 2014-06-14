@@ -72,7 +72,8 @@ app.post('/register',function(req,res){
 	var user={
 		username:req.body.user,
 		password:req.body.pass,
-		email:req.body.email
+		email:req.body.email,
+		date:(new Date()).toJSON()
 	}
 	db.collection('users').insert(user,function(err,result){
 		if(err){
@@ -102,31 +103,31 @@ app.get('/create',isLoggedIn,function(req,res){
 	res.render('create');
 });
 app.post('/create',isLoggedIn,function(req,res){
-	var title=req.body.title;
-	var desc=req.body.description;
-	var whycat=req.body.whycat;
-	var admin=req.body.admin;
+	var question=req.body.question;
+	var tags=req.body.tags;
+	tags=tags.toLowerCase().split(',');
 	var date=(new Date()).toJSON();
-
+	var username=req.session.user;
 	var id;
 	db.collection('users').findOne({username:req.session.user,password:req.session.pass},function(err,doc){
 		if(!err){
 			id=doc._id;
 		
-	category={
-		creatorId:id,//creator
-		title:title,
-		description:desc,
-		whyCategory:whycat,
-		admin:admin, //0 for no,1 for yes
-		createdOn:date
+	poll={
+		creatorId:id,
+		creator:username,
+		question:question,
+		createdOn:date,
+		tags:tags,
+		up:1,
+		down:0
 	}
-	db.collection('category').insert(category,function(err,result){
+	db.collection('polls').insert(poll,function(err,result){
 		if(err){
 			res.send(err);
 		}
 		else{
-			res.redirect('/category');
+			res.redirect('/mypolls');
 		}
 		});
 
@@ -148,19 +149,6 @@ app.get('/category/:title',function(req,res){
 	var title=req.param('title');
 	db.collection('category').findOne({title:title},function(err,item){
 		res.render('catpage',{category:{title:title,description:item.description}});
-	});
-});
-app.get('/limitcat',function(req,res){
-	res.send({limitCat:limitCat});
-});	/*	
-app.get('/next/:current',function(req,res){
-	var current=req.param('current');
-	console.log(toSkip);
-});*/
-app.post('/next/:toskip',function(req,res){
-	toSkip=req.param('toskip')*2;
-	db.collection('category').find({},{},{skip:toSkip,limit:limitCat}).toArray(function(err,items){
-		res.send(items);
 	});
 });
 app.get('/links',function(req,res){
@@ -223,8 +211,31 @@ app.post('/links',isLoggedIn,function(req,res,next){
 app.get('/search',function(req,res){
 	var query=req.query.search;
 	a=query.toLowerCase().split(' ');
-	db.collection('links').find({tags:{$in:a}}).toArray(function(err,items){
+	db.collection('polls').find({tags:{$in:a}}).toArray(function(err,items){
 		res.send(items);
+	});
+});
+app.get('/edit',isLoggedIn,function(req,res){
+		res.render('edit');
+});
+app.get('/ajedit',isLoggedIn,function(req,res){
+	db.collection('users').findOne({username:req.session.user,password:req.session.pass},function(err,doc){
+		res.send(doc);	
+	});
+});
+app.post('/edit',isLoggedIn,function(req,res){
+	user=req.body.user;
+	email=req.body.email;
+	db.collection('users').update({username:req.session.user},{$set:{username:user,email:email}},function(err,result){
+		if(!err){
+			req.session.user=user
+			res.redirect('/');
+		}
+	});
+});
+app.get('/mypolls',function(req,res){
+	db.collection('polls').find({username:req.session.user}).toArray(function(err,items){
+		res.render('mypoll',{polls:items});
 	});
 });
 var server = app.listen(port,function(){

@@ -1,0 +1,9 @@
+extends index2
+block content
+	div(id="register_container")
+		p Edit Details
+		form(method="POST",action='/edit',name='edit',id="reg")
+			input(class="form-control input",type='text',id="user",name='user',placeholder="Username",required)
+			input(class="form-control input",id="email",type='email',name='email',placeholder="Email",required)
+			input(class="btn-block",type='submit',id="log3")
+

@@ -1,3 +1,6 @@
+body{
+	background-image: url("../images/tree_bark.png");
+}
 #login_container{
 	margin: auto;
 	width: 300px;
@@ -24,4 +27,44 @@
 	padding: 20px;
 	border-radius: 4px;
 	border: 1px dashed #aaa;
+}
+#logout{
+float: right;
+padding: 0px;
+border-bottom: 3px solid black;
+}
+.bot_bor{
+	border-bottom: 3px solid black;
+	border-radius: 5px;
+	margin-right: 3px;
+	margin-bottom: 20px;
+}
+ul{
+	list-style: none;
+}
+#prof{
+	text-align: center;
+	height: 100px;
+	margin: 50px;
+	border-radius: 20px;
+}
+#edit{
+	position: absolute;
+	left: 50%;
+}
+#stats{
+	background-color: #eee;
+	height: 200px;
+	margin: 50px;
+	text-align: center;
+}
+#pollcr{
+	width: 500px;
+	margin: auto;
+}
+.mar{
+	margin: 20px;
+}
+#search{
+	margin-left: 40px;
 }
