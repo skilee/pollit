@@ -1,14 +1,13 @@
 $(function(){
-	function Poll(id){
+	function Poll(id,up,down){
 		this.id=id;
 		this.up=$('#up_'+id);
 		this.down=$('#down_'+id);
-		this.upVal=1;
-		this.downVal=0;
+		this.upVal=typeof up!=='undefined'?up:1;
+		this.downVal=typeof down!=='undefined'?down:0;
 		this.canvas=document.getElementById('myCanvas_'+id);
 		this.ctx=this.canvas.getContext('2d');
-
-	}
+}
 	Poll.prototype.upVote=function(){
 		this.upVal+=1;
 	}
@@ -34,24 +33,42 @@ $(function(){
 	}
 
 	var widthFull=400;
-	var polls=[];
-	var li=$('#latest_container li');
-	for(var i=0;i<li.length;i++){
-		polls[i]=new Poll(i);
-		polls[i].up.click(function(){
-			var i=$(this).attr('id').split('_')[1]; 
-			polls[i].upVote();
-			$('#upVal_'+i).text(polls[i].upVal);
+	var latest=function(){
+		var polls=[];
+		var li=$('#latest_container li');
+		for(var i=0;i<li.length;i++){
+			polls[i]=new Poll(i);
+			polls[i].up.click(function(){
+				var i=$(this).attr('id').split('_')[1]; 
+				polls[i].upVote();
+				$('#upVal_'+i).text(polls[i].upVal);
+				polls[i].draw();
+			});
+			polls[i].down.click(function(){
+				var i=$(this).attr('id').split('_')[1]; 
+				polls[i].downVote();
+				$('#downVal_'+i).text(polls[i].downVal);
+				polls[i].draw();
+			});
 			polls[i].draw();
-		});
-		polls[i].down.click(function(){
-			var i=$(this).attr('id').split('_')[1]; 
-			polls[i].downVote();
-			$('#downVal_'+i).text(polls[i].downVal);
-			polls[i].draw();
-		});
-		polls[i].draw();
 
+		}
 	}
-	
+	var mine=function(){
+		var polls=[];
+		var li=$('#my_container li');
+		for(var i=0;i<li.length;i++){
+			var up=parseInt($('#upVal_'+i).text());
+			var down=parseInt($('#downVal_'+i).text());
+			polls[i]=new Poll(i,up,down);
+			polls[i].draw();
+	}
+}
+if(top.location.pathname==='/'){
+	latest();
+}
+
+if(top.location.pathname==='/mypolls'){
+	window.onLoad=mine();
+}
 });

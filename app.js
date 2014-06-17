@@ -89,8 +89,16 @@ app.get('/register',function(req,res){
 });
 app.get('/profile',isLoggedIn,function(req,res){
 	db.collection('users').findOne({username:req.session.user,password:req.session.pass},function(err,doc){
+		var number;
 		if(!err){
-			res.render('profile',{doc:{user:String(doc.username),pass:doc.password,email:doc.email}});
+			var d=(new Date(doc.date)).toLocaleDateString();
+			db.collection('polls').count({creator:req.session.user},function(err,count){
+				if(!err){
+					//count=count.replace('<','');
+					//count=count.replace('>','');
+					res.render('profile',{doc:{user:String(doc.username),pass:doc.password,email:doc.email,createdOn:d,number:parseInt(count)}});
+				}
+			});
 		}
 	});
 });
@@ -234,9 +242,16 @@ app.post('/edit',isLoggedIn,function(req,res){
 	});
 });
 app.get('/mypolls',function(req,res){
-	db.collection('polls').find({username:req.session.user}).toArray(function(err,items){
-		res.render('mypoll',{polls:items});
+	db.collection('polls').find({creator:req.session.user}).toArray(function(err,items){
+		res.render('mypoll',{items:items});
 	});
+});
+app.get('/usercheck',function(req,res){
+	var userToCheck=req.query.username;
+	db.collection('users').findOne({username:userToCheck},function(err,doc){
+		res.send(doc);
+	});
+
 });
 var server = app.listen(port,function(){
 	console.log('Listening on port %d',port);

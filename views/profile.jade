@@ -10,10 +10,8 @@ block content
 			td #{doc.pass}
 			td #{doc.email}
 
-	a(href="/edit",id="edit")		
+	a(href="/edit",id="edit")
 		button(class="btn") Edit
 	div(id="stats",class="col-md-3 col-sm-3 col-xs-3")
-		h3 Joint On:#{doc.date}
-		h3 Polls created:
-
-		
+		h3 <u>Joint On</u>: <br>#{doc.createdOn}
+		h3 <u>Polls created</u>:<br> #{doc.number}

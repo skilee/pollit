@@ -1,2 +1,21 @@
 extends index2
 block content
+	-var j=[];
+	-var i=0
+	div(id="my_container")
+		div(id="poll")
+			ul
+				each item in items
+					li
+						h2(id=item._id,class="question")
+							a(href='#') 
+								=item.question
+						canvas(id="myCanvas_"+i,width="400px",height="40px")
+						br
+						h4 Yes
+							button(id="upVal_"+i,class="btn") #{item.up}
+						h4 No
+							button(id="downVal_"+i,class="btn")	#{item.down}
+						-j.push(item)
+						-i+=1
+						hr
