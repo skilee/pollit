@@ -71,3 +71,6 @@ ul{
 .hide{
 	display: none;
 }
+button{
+	margin: 10px;
+}

@@ -8,11 +8,36 @@ $(function(){
 		this.canvas=document.getElementById('myCanvas_'+id);
 		this.ctx=this.canvas.getContext('2d');
 }
-	Poll.prototype.upVote=function(){
-		this.upVal+=1;
+	Poll.prototype.upVote=function(i){
+		var id=this.up.data('id');
+		id=id.substring(1,25);
+		$.get('/up/'+id,function(data){
+		if(data.length!=0){
+				polls[i].upVal+=1;
+				$('#upVal_'+i).text(polls[i].upVal);
+				polls[i].draw();			
+		}else{
+			polls[i].up.remove();
+			polls[i].down.remove();
+			$('#sp_'+i).text('Already voted!');
+		}
+		});
 	}
-	Poll.prototype.downVote=function(){
-		this.downVal+=1;
+	Poll.prototype.downVote=function(i){
+		var id=this.down.data('id');
+		id=id.substring(1,25);
+		$.get('/down/'+id,function(data){
+		if(data.length!=0){
+				polls[i].downVal+=1;
+				$('#downVal_'+i).text(polls[i].downVal);
+				polls[i].draw();			
+		}else{
+
+			polls[i].up.remove();
+			polls[i].down.remove();
+			$('#sp_'+i).text('Already voted!');
+		}
+		});
 	}
 	Poll.prototype.draw=function(){
 		var ctx=this.ctx;
@@ -32,23 +57,25 @@ $(function(){
 		ctx.fillRect(widthRect1,0,widthFull,25)
 	}
 
+	var polls=[];
 	var widthFull=400;
 	var latest=function(){
-		var polls=[];
 		var li=$('#latest_container li');
 		for(var i=0;i<li.length;i++){
-			polls[i]=new Poll(i);
+			var up=parseInt($('#upVal_'+i).text());
+			var down=parseInt($('#downVal_'+i).text());
+			polls[i]=new Poll(i,up,down);
 			polls[i].up.click(function(){
 				var i=$(this).attr('id').split('_')[1]; 
-				polls[i].upVote();
-				$('#upVal_'+i).text(polls[i].upVal);
-				polls[i].draw();
+				polls[i].upVote(i);
+				$(this).remove();
+				polls[i].down.remove();
 			});
 			polls[i].down.click(function(){
 				var i=$(this).attr('id').split('_')[1]; 
-				polls[i].downVote();
-				$('#downVal_'+i).text(polls[i].downVal);
-				polls[i].draw();
+				polls[i].downVote(i);
+				$(this).remove();
+				polls[i].up.remove();
 			});
 			polls[i].draw();
 

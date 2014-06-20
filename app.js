@@ -6,6 +6,15 @@ var cookieSession=require('cookie-session');
 var port = process.env.PORT || 3000;
 app.set('title','Pollit');
 app.locals.title='Pollit';
+
+
+//================================
+// DataBase Related
+//================================
+
+
+var mongo=require('mongodb');
+var bson=mongo.BSONPure;
 var MongoClient=require('mongodb').MongoClient;
 var db;//go get access to db outside connect
 MongoClient.connect("mongodb://pollit:skillandlearn@kahana.mongohq.com:10083/pollit",function(err,database){
@@ -14,11 +23,18 @@ MongoClient.connect("mongodb://pollit:skillandlearn@kahana.mongohq.com:10083/pol
 		db=database;
 	}
 });
+
+
+//================================
+// Middleware
+//================================
+
 app.use(bodyParser());
 app.use(cookieParser('SueCrEeT'));
 app.use(cookieSession({keys:['sec1','sec2']}));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
+
 //middleware to check if user logged in or not
 var isLoggedIn = function(req, res, next) {
   if (req.session && req.session.user)
@@ -27,13 +43,28 @@ var isLoggedIn = function(req, res, next) {
     res.redirect('/login'); // not logged in, redirect to login page
 };	
 app.get('/',function(req,res){
-	if(req.session&&req.session.user){		
-		res.render('home2');
+	if(req.session&&req.session.user){
+		db.collection('polls').find().sort({_id:-1}).limit(3).toArray(function(err,items){
+			res.render('home2',{items:items});
+	
+		});
 	}
 	else{
-		res.render('home');
+		db.collection('polls').find().sort({_id:-1}).limit(3).toArray(function(err,items){
+			res.render('home',{items:items});
+	
+		});
 	}
 });
+
+
+
+//================================
+// Registration and Login
+//================================
+
+
+
 app.get('/login',function(req,res){
 	if(req.session&&req.session.user){		
 		res.redirect('/');
@@ -73,7 +104,9 @@ app.post('/register',function(req,res){
 		username:req.body.user,
 		password:req.body.pass,
 		email:req.body.email,
-		date:(new Date()).toJSON()
+		date:(new Date()).toJSON(),
+		mypollsUp:[' '],
+		mypollsDown:[' ']
 	}
 	db.collection('users').insert(user,function(err,result){
 		if(err){
@@ -87,6 +120,23 @@ app.post('/register',function(req,res){
 app.get('/register',function(req,res){
 	res.render('register');
 });
+app.get('/usercheck',function(req,res){
+	var user=req.query.username;
+	db.collection('users').find({username:user}).toArray(function(err,users){
+		if (users.length==0) {
+			res.send('')
+		}else{
+			res.send(' ');
+		}
+	});
+});
+
+//================================
+// Profile
+//================================
+
+
+
 app.get('/profile',isLoggedIn,function(req,res){
 	db.collection('users').findOne({username:req.session.user,password:req.session.pass},function(err,doc){
 		var number;
@@ -102,11 +152,16 @@ app.get('/profile',isLoggedIn,function(req,res){
 		}
 	});
 });
-app.get('/category',isLoggedIn,function(req,res){
-	db.collection('category').find().toArray(function(err,items){
-		res.render('category',{items:items});
-	});
-});
+
+
+
+
+//================================
+// Create Polls
+//================================
+
+
+
 app.get('/create',isLoggedIn,function(req,res){
 	res.render('create');
 });
@@ -117,12 +172,8 @@ app.post('/create',isLoggedIn,function(req,res){
 	var date=(new Date()).toJSON();
 	var username=req.session.user;
 	var id;
-	db.collection('users').findOne({username:req.session.user,password:req.session.pass},function(err,doc){
-		if(!err){
-			id=doc._id;
 		
 	poll={
-		creatorId:id,
 		creator:username,
 		question:question,
 		createdOn:date,
@@ -139,20 +190,24 @@ app.post('/create',isLoggedIn,function(req,res){
 		}
 		});
 
-	}
-});
-});
+	});
+
+
+//================================
+// Logout
+//================================
+
+
+
 app.get('/logout',function(req,res){    
 	req.session=null;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
     res.redirect('/');   
-});/*
-app.get('/islogged',function(req,res){
-	if(req.session&&req.session.user){
-		res.send('true');
-	}else{
-		res.send('false');
-	}
-});*/
+});
+
+//================================
+// To Remove(from skile, for reference)
+//================================
+
 app.get('/category/:title',function(req,res){
 	var title=req.param('title');
 	db.collection('category').findOne({title:title},function(err,item){
@@ -216,6 +271,15 @@ app.post('/links',isLoggedIn,function(req,res,next){
 	});
 	});
 });
+
+
+
+//================================
+// Search
+//================================
+
+
+
 app.get('/search',function(req,res){
 	var query=req.query.search;
 	a=query.toLowerCase().split(' ');
@@ -223,6 +287,14 @@ app.get('/search',function(req,res){
 		res.send(items);
 	});
 });
+
+
+//================================
+// Editing
+//================================
+
+
+
 app.get('/edit',isLoggedIn,function(req,res){
 		res.render('edit');
 });
@@ -241,17 +313,84 @@ app.post('/edit',isLoggedIn,function(req,res){
 		}
 	});
 });
+
+
+
+//================================
+// Polls
+//================================
+
+
+
 app.get('/mypolls',function(req,res){
 	db.collection('polls').find({creator:req.session.user}).toArray(function(err,items){
 		res.render('mypoll',{items:items});
 	});
 });
-app.get('/usercheck',function(req,res){
-	var userToCheck=req.query.username;
-	db.collection('users').findOne({username:userToCheck},function(err,doc){
-		res.send(doc);
-	});
 
+
+
+//================================
+// Upvote
+//================================
+
+
+
+app.get('/up/:id',function(req,res){
+	var mypollsUp=[];
+	var mypollsDown=[];
+	var id=req.param('id');
+	db.collection('users').findOne({username:req.session.user},function(err,user){
+		mypollsUp=user.mypollsUp;
+		mypollsDown=user.mypollsDown;
+		if(mypollsUp.indexOf(id)==-1&&mypollsDown.indexOf(id)==-1){
+			db.collection('polls').update({_id:new bson.ObjectID(id)},{$inc:{up:1}},function(err,result){
+				if(!err){
+					db.collection('users').update({username:req.session.user},{$push:{mypollsUp:id}},function(err,result){
+							if(!err){
+								res.send(' ');
+							}
+					});
+				}
+			});
+		}else{
+			res.send('');
+		}
+	
+});
+});
+
+
+
+//================================
+// Downvote
+//================================
+
+
+
+app.get('/down/:id',function(req,res){
+	var mypollsDown=[];
+	var mypollsUp=[];
+	var id=req.param('id');
+	db.collection('users').findOne({username:req.session.user},function(err,user){
+		mypollsDown=user.mypollsDown;
+		mypollsUp=user.mypollsUp;
+		if(mypollsDown.indexOf(id)==-1&&mypollsUp.indexOf(id)==-1){
+			db.collection('polls').update({_id:new bson.ObjectID(id)},{$inc:{down:1}},function(err,result){
+				if(!err){
+					db.collection('users').update({username:req.session.user},{$push:{mypollsDown:id}},function(err,result){
+							if(!err){
+								res.send(' ');
+							}
+					});
+				}
+			});
+		}else{
+			res.send('');
+		}
+	
+});
+	
 });
 var server = app.listen(port,function(){
 	console.log('Listening on port %d',port);

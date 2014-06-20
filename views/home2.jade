@@ -2,23 +2,21 @@ extends index2
 block content
 	div(id="latest_container")
 		h2 Latest Polls Come Here
+		-var i=0
 		div(id="poll")
 			ul
-				li
-					h3 Poll Question 1
-					canvas(id="myCanvas_0",width="400px",height="40px")
-					br
-					h4(id="upVal_0") 1
-					button(id="up_0") Yes
-					h4(id="downVal_0") 0
-					button(id="down_0") No
-					hr
-
-				li
-					h3 Poll Question 2
-					canvas(id="myCanvas_1",width="400px",height="30px")
-					br
-					h4(id="upVal_1") 1
-					button(id="up_1") Yes
-					h4(id="downVal_1") 0
-					button(id="down_1") No
+				each item in items
+					li
+						h2(id=item._id,class="question")
+							a(href='#') 
+								=item.question
+						canvas(id="myCanvas_"+i,width="400px",height="40px")
+						br
+						button(id="upVal_"+i,class="btn") #{item.up}
+						button(id="up_"+i,data-id=item._id) Yes
+						span(id="sp_"+i)
+						button(id="downVal_"+i,class="btn") #{item.down}
+						button(id="down_"+i,data-id=item._id) No
+						span(id="sp_"+i)
+						-i+=1
+						hr

@@ -91,7 +91,6 @@ if(top.location.pathname==='/register'){
        		}
        		else{
        			data.forEach(function(item){
-       				console.log('asd');
        			var res1='<h3>'+item.question+"</h3>";
 		  		$('#results').html(res1).show();
        			});
