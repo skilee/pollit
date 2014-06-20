@@ -1,0 +1,21 @@
+extends index2
+block content
+	div(id="polls_container")
+		-var i=0
+		div(id="poll")
+			ul
+				each item in items
+					li
+						h2(id=item._id,class="question")
+							a(href='#') 
+								=item.question
+						canvas(id="myCanvas_"+i,width="400px",height="40px")
+						br
+						button(id="upVal_"+i,class="btn") #{item.up}
+						button(id="up_"+i,data-id=item._id) Yes
+						span(id="sp_"+i)
+						button(id="downVal_"+i,class="btn") #{item.down}
+						button(id="down_"+i,data-id=item._id) No
+						span(id="sp_"+i)
+						-i+=1
+						hr

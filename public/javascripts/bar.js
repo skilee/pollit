@@ -81,6 +81,28 @@ $(function(){
 
 		}
 	}
+	var all=function(){
+		var li=$('#polls_container li');
+		for(var i=0;i<li.length;i++){
+			var up=parseInt($('#upVal_'+i).text());
+			var down=parseInt($('#downVal_'+i).text());
+			polls[i]=new Poll(i,up,down);
+			polls[i].up.click(function(){
+				var i=$(this).attr('id').split('_')[1]; 
+				polls[i].upVote(i);
+				$(this).remove();
+				polls[i].down.remove();
+			});
+			polls[i].down.click(function(){
+				var i=$(this).attr('id').split('_')[1]; 
+				polls[i].downVote(i);
+				$(this).remove();
+				polls[i].up.remove();
+			});
+			polls[i].draw();
+
+		}
+	}
 	var mine=function(){
 		var polls=[];
 		var li=$('#my_container li');
@@ -92,10 +114,13 @@ $(function(){
 	}
 }
 if(top.location.pathname==='/'){
-	latest();
+	window.onload=latest();
 }
 
 if(top.location.pathname==='/mypolls'){
 	window.onLoad=mine();
+}
+if(top.location.pathname==='/polls'){
+	window.onLoad=all();
 }
 });

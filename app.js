@@ -389,9 +389,22 @@ app.get('/down/:id',function(req,res){
 			res.send('');
 		}
 	
-});
+	});
 	
 });
+
+
+
+//================================
+// All Polls
+//================================
+
+app.get('/polls',function(req,res){
+	db.collection('polls').find().toArray(function(err,items){
+		res.render('polls',{items:items});
+	});
+});
+
 var server = app.listen(port,function(){
 	console.log('Listening on port %d',port);
 });
