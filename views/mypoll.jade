@@ -1,5 +1,7 @@
 extends index2
 block content
+	div(id="inst")
+		h3 Here are all the polls that you created.
 	-var j=[];
 	-var i=0
 	div(id="my_container")
@@ -12,9 +14,9 @@ block content
 								=item.question
 						canvas(id="myCanvas_"+i,width="400px",height="40px")
 						br
-						h4 Yes
+						h3 Yes
 							button(id="upVal_"+i,class="btn") #{item.up}
-						h4 No
+						h3 No
 							button(id="downVal_"+i,class="btn") #{item.down}
 						-j.push(item)
 						-i+=1

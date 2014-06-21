@@ -199,7 +199,7 @@ app.post('/create',isLoggedIn,function(req,res){
 
 
 
-app.get('/logout',function(req,res){    
+app.get('/logout',isLoggedIn,function(req,res){    
 	req.session=null;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
     res.redirect('/');   
 });
@@ -280,7 +280,7 @@ app.post('/links',isLoggedIn,function(req,res,next){
 
 
 
-app.get('/search',function(req,res){
+app.get('/search',isLoggedIn,function(req,res){
 	var query=req.query.search;
 	a=query.toLowerCase().split(' ');
 	db.collection('polls').find({tags:{$in:a}}).toArray(function(err,items){
@@ -322,7 +322,7 @@ app.post('/edit',isLoggedIn,function(req,res){
 
 
 
-app.get('/mypolls',function(req,res){
+app.get('/mypolls',isLoggedIn,function(req,res){
 	db.collection('polls').find({creator:req.session.user}).toArray(function(err,items){
 		res.render('mypoll',{items:items});
 	});
@@ -336,7 +336,7 @@ app.get('/mypolls',function(req,res){
 
 
 
-app.get('/up/:id',function(req,res){
+app.get('/up/:id',isLoggedIn,function(req,res){
 	var mypollsUp=[];
 	var mypollsDown=[];
 	var id=req.param('id');
@@ -368,7 +368,7 @@ app.get('/up/:id',function(req,res){
 
 
 
-app.get('/down/:id',function(req,res){
+app.get('/down/:id',isLoggedIn,function(req,res){
 	var mypollsDown=[];
 	var mypollsUp=[];
 	var id=req.param('id');
@@ -399,7 +399,7 @@ app.get('/down/:id',function(req,res){
 // All Polls
 //================================
 
-app.get('/polls',function(req,res){
+app.get('/polls',isLoggedIn,function(req,res){
 	db.collection('polls').find().toArray(function(err,items){
 		res.render('polls',{items:items});
 	});

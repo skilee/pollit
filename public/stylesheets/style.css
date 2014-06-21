@@ -74,3 +74,30 @@ ul{
 button{
 	margin: 10px;
 }
+#inst{
+	opacity: .7;
+	float: left;
+	width: 20%;
+	color: white;
+	margin: 20px;
+	padding: 30px;
+	border-radius: 10px;
+	clear: both;
+	background-color: #505050;
+}
+#polls_container{
+
+	margin: auto;
+	width: 500px;
+	padding: 20px;
+	border-radius: 4px;
+	border: 1px dashed #aaa;
+}
+#my_container{
+	
+	margin: auto;
+	width: 500px;
+	padding: 20px;
+	border-radius: 4px;
+	border: 1px dashed #aaa;
+}

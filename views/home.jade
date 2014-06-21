@@ -1,5 +1,8 @@
 extends index
 block content
+
+	div(id="inst")
+		h3 Login and vote in these polls or create your own polls.
 	div(id="latest_container")
 		h2 Latest Polls Come Here
 		-var i=0
@@ -12,7 +15,9 @@ block content
 								=item.question
 						canvas(id="myCanvas_"+i,width="400px",height="40px")
 						br
+						h3 Yes
 						button(id="upVal_"+i,class="btn") #{item.up}
+						h3 No
 						button(id="downVal_"+i,class="btn") #{item.down}
 						-i+=1
 						hr
