@@ -396,14 +396,79 @@ app.get('/down/:id',isLoggedIn,function(req,res){
 
 
 //================================
+// Remove from mypolls
+//================================
+
+
+app.get('/mypolls/rem/:id',function(req,res){
+	var id=req.param('id');
+	var user=req.session.user;
+	db.collection('polls').findOne({creator:user},function(err,doc){
+		if(doc.creator===user){
+			db.collection('polls').remove({_id:new bson.ObjectID(id)},{justOne:true},function(err,result){
+				res.redirect('/mypolls');
+			});
+		}else{
+			res.send('not deleted due to some error');
+		}
+	});
+});
+
+
+
+
+//================================
 // All Polls
 //================================
+
 
 app.get('/polls',isLoggedIn,function(req,res){
 	db.collection('polls').find().toArray(function(err,items){
 		res.render('polls',{items:items});
 	});
 });
+
+
+
+//================================
+// each poll
+//================================
+
+
+
+app.get('/polls/:id',function(req,res){
+	var id=req.param('id');
+	db.collection('comments').find({pollId:id}).sort({_id:-1}).toArray(function(err,comments){
+		db.collection('polls').findOne({_id:new bson.ObjectID(id)},function(err,doc){
+			res.render('apoll',{doc:doc,comments:comments});
+		});
+	});
+});
+
+
+
+//================================
+// Comments
+//================================
+
+app.get('/comment/:id',function(req,res){
+	var id=req.param('id');
+	var comment=req.query.comment;
+	var commentObj={
+		pollId:id,
+		date:(new Date()).toLocaleDateString(),
+		commentor:req.session.user,
+		comment:comment
+	}
+	db.collection('comments').insert(commentObj,function(err,result){
+		if(!err){
+			res.send(result);	
+		}else{
+			res.send('');
+		}
+	});
+});
+
 
 var server = app.listen(port,function(){
 	console.log('Listening on port %d',port);

@@ -1,0 +1,25 @@
+extends index2
+block content
+	div(id="polls_container")
+		h2 #{doc.question}
+		canvas(id="myCanvas_0",width="400px",height="40px")
+		br
+		button(id="upVal_0",class="btn") #{doc.up}
+		button(id="up_0",data-id=doc._id) Yes
+		span(id="sp_0")
+		button(id="downVal_0",class="btn") #{doc.down}
+		button(id="down_0",data-id=doc._id) No
+		span(id="sp_0")
+		hr
+	div(id="comment_container")
+		div(id="comment_inp")
+			textarea(class="form-control input",rows="5",type='textbox',name='comment',id="comment",placeholder="Leave a comment")
+			button(class="btn",id="comm_sub") submit
+		div(id="comments")
+			ul(id="comm_list")
+				each comment in comments
+					li(id='comm')
+						h3 #{comment.comment}
+						<hr>
+						h4 #{comment.commentor}
+						h5 #{comment.date}

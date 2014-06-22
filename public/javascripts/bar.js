@@ -41,8 +41,8 @@ $(function(){
 	}
 	Poll.prototype.draw=function(){
 		var ctx=this.ctx;
-		var colorUp="#666666";
-		var colorDown="#bbbbbb";
+		var colorUp="#428bca";
+		var colorDown="#ffffff";
 		ctx.strokeStyle="#000000";
 		ctx.lineWidth=2;
 		var total=this.upVal+this.downVal;
@@ -112,6 +112,36 @@ $(function(){
 			polls[i]=new Poll(i,up,down);
 			polls[i].draw();
 	}
+}
+
+	var poll;
+	var apoll=function(){
+		var up=parseInt($('#upVal_0').text());
+		var down=parseInt($('#downVal_0').text());
+		poll=new Poll(0,up,down);
+		poll.draw();
+		polls[0]=poll;
+		poll.up.click(function(){ 
+			poll.upVote(0);
+			$(this).remove();
+			poll.down.remove();
+			});
+		poll.down.click(function(){
+			poll.downVote(0);
+			$(this).remove();
+			poll.up.remove();
+			});
+	}
+/*
+var apollId=$('#up_0').data('id').substring(1,25);
+var apollPath=top.location.pathname.split('/');
+if(apollPath[apollPath.length-1]===apollId){
+	apoll();
+}*/
+var last=top.location.pathname.split('/');
+var patt=new RegExp("\/polls/"+last[last.length-1]);
+if(patt.test(top.location.pathname)){
+	apoll();
 }
 if(top.location.pathname==='/'){
 	window.onload=latest();

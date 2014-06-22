@@ -100,4 +100,21 @@ if(top.location.pathname==='/register'){
 	}
    });
 
+
+	//======================
+	//		Comments	
+	//======================
+
+	$('#comm_sub').click(function(){
+		var parameters={comment:$('#comment').val()};
+		console.log(parameters.comment);
+		var id=$('#up_0').data('id').substring(1,25);
+		var getAj=$.get('/comment/'+id,parameters,function(data){
+			if(data.length!=0){
+				$('#comm_list').prepend("<li id='comm'><h3>"+parameters.comment+"</h3><hr><h4>"+data[0].commentor+"</h4><h5>"+data[0].date+"</h5>")
+			}
+		});
+		$('#comment').val('');
+	});
+
 });

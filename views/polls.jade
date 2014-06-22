@@ -9,7 +9,7 @@ block content
 				each item in items
 					li
 						h2(id=item._id,class="question")
-							a(href='#') 
+							a(href='/polls/'+item._id) 
 								=item.question
 						canvas(id="myCanvas_"+i,width="400px",height="40px")
 						br
