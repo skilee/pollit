@@ -132,12 +132,7 @@ $(function(){
 			poll.up.remove();
 			});
 	}
-/*
-var apollId=$('#up_0').data('id').substring(1,25);
-var apollPath=top.location.pathname.split('/');
-if(apollPath[apollPath.length-1]===apollId){
-	apoll();
-}*/
+
 var last=top.location.pathname.split('/');
 var patt=new RegExp("\/polls/"+last[last.length-1]);
 if(patt.test(top.location.pathname)){

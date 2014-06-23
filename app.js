@@ -178,7 +178,7 @@ app.post('/create',isLoggedIn,function(req,res){
 		question:question,
 		createdOn:date,
 		tags:tags,
-		up:1,
+		up:0,
 		down:0
 	}
 	db.collection('polls').insert(poll,function(err,result){
@@ -304,8 +304,8 @@ app.get('/ajedit',isLoggedIn,function(req,res){
 	});
 });
 app.post('/edit',isLoggedIn,function(req,res){
-	user=req.body.user;
-	email=req.body.email;
+	var user=req.body.user;
+	var email=req.body.email;
 	db.collection('users').update({username:req.session.user},{$set:{username:user,email:email}},function(err,result){
 		if(!err){
 			req.session.user=user
@@ -314,11 +314,37 @@ app.post('/edit',isLoggedIn,function(req,res){
 	});
 });
 
+app.get('/mypolls/edit/:id',isLoggedIn,function(req,res){
+	var id=req.param('id');
+	db.collection('polls').findOne({_id:new bson.ObjectID(id)},function(err,poll){
+		res.render('polledit',{poll:poll});
+	});
+});
+
+app.post('/mypolls/edit/:id',isLoggedIn,function(req,res){
+	var id=req.param('id');
+	var question=req.body.question;
+	var tags=req.body.tags;
+	db.collection('polls').findOne({_id:new bson.ObjectID(id)},function(err,poll){		if(poll.creator===req.session.user){
+			db.collection('polls').update({_id:new bson.ObjectID(id)},{$set:{question:question,tags:tags}},function(err,result){
+				if(!err){
+					res.redirect('/mypolls');
+				}
+			});
+		}else{
+			res.send('you did not create the poll, so you cannot edit it :/ ');
+		}
+			
+	});
+});
+
+
 
 
 //================================
 // Polls
 //================================
+
 
 
 
@@ -450,6 +476,8 @@ app.get('/polls/:id',function(req,res){
 //================================
 // Comments
 //================================
+
+
 
 app.get('/comment/:id',function(req,res){
 	var id=req.param('id');

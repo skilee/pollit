@@ -1,0 +1,7 @@
+extends index2
+block content
+	div(id="pollcr")
+		form(method="POST",action='/mypolls/edit/'+poll._id,name='register',class="col-mid-6")
+			input(class="form-control",type='text',class="mar",name='question',placeholder="Poll Question",value=poll.question,required)
+			input(class="form-control",type='text',class="mar",name='tags',placeholder="Tags Here,comma separated",value=poll.tags)
+			input(class="btn mar",type='Submit',value="Edit")

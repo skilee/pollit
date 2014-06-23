@@ -13,7 +13,9 @@ block content
 							a(href='/polls/'+item._id) 
 								=item.question
 							a(href="/mypolls/rem/"+item._id)
-								button(class=" btn btn-danger") Remove
+								button(class="btn btn-danger") Remove
+							a(href="/mypolls/edit/"+item._id)
+								button(class="btn btn-warning") Edit
 						canvas(id="myCanvas_"+i,width="400px",height="40px")
 						br
 						h3 Yes
