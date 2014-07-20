@@ -6,13 +6,15 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "4.*.*",
+    "body-parser": "^1.4.3",
+    "cookie-parser": "*",
+    "cookie-session": "*",
+    "express": "^4.6.1",
+    "express-session": "^1.6.5",
     "jade": "*",
-    "mongodb": "*",
-    "newrelic":"*",
-    "body-parser":"*",
-    "cookie-parser":"*",
-    "cookie-session":"*",
-    "nodemon":"*"
+    "mongodb": "^1.4.7",
+    "newrelic": "*",
+    "nodemon": "*",
+    "pwd": "0.0.4"
   }
 }

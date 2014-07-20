@@ -91,7 +91,7 @@ if(top.location.pathname==='/register'){
        		}
        		else{
        			data.forEach(function(item){
-       			var res1='<h3>'+item.question+"</h3>";
+       			var res1='<a href=/polls/'+item._id+'> <h3>'+item.question+"</h3></a>";
 		  		$('#results').html(res1).show();
        			});
 		}
