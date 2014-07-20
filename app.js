@@ -154,7 +154,7 @@ app.get('/down/:id',isLoggedIn,polls.down);
 //================================
 
 
-app.get('/mypolls/rem/:id',myPolls.remove);
+app.get('/mypolls/rem/:id',isLoggedIn,myPolls.remove);
 
 
 
@@ -184,7 +184,7 @@ app.get('/polls/:id',polls.page);
 
 
 
-app.get('/comment/:id',polls.comment);
+app.get('/comment/:id',isLoggedIn,polls.comment);
 
 
 var server = app.listen(port,function(){

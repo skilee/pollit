@@ -4,7 +4,7 @@ exports.getDb = function(database){
 	db = database;
 }
 
-exports.profile = function(req,res){
+exports.profile = function(req,res){	
 	db.collection('users').findOne({username:req.session.user,password:req.session.pass},function(err,doc){
 		var number;
 		if(!err){

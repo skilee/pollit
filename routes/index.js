@@ -4,20 +4,19 @@ exports.getDb = function(database){
 }
 
 exports.root = function (req,res){
-	if(req.session&&req.session.user){
+	if(req.session != null && req.session.user != null){
 		db.collection('polls').find().sort({_id:-1}).limit(3).toArray(function(err,items){
 			res.render('home2',{items:items});
 	
 		});
 	}
 	else{
-		db.collection('polls').find().sort({_id:-1}).limit(3).toArray(function(err,items){
+		db.collection('polls').find().sort({_id:-1}).limit(3).toArray(function(err,items){			
 			res.render('home',{items:items});
-	
 		});
 	}
 }
 exports.logout = function(req,res){    
-	req.session=null;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-    res.redirect('/');   
+	req.session.user = null;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    res.redirect('/');
 }
