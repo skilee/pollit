@@ -1,19 +1,55 @@
 body{
-	background-image: url("../images/tree_bark.png");
+	background-color: #7ECEFD;
 }
+
+ul{
+	list-style: none;
+}
+
+a{
+	text-decoration: none!important;
+}
+th{
+	text-align: center;
+	color: #3E454C;
+}
+canvas{
+	width:100%;
+}
+/*
+=================Navigation=====
+ */
+nav{
+	width: 100%;
+	height: 50px;
+	background-color: #3E454C;
+}
+nav a{
+	color: #F3FFE2;
+}
+/*
+=================Login and Registration=====
+ */
 #login_container{
-	margin: auto;
+	margin: 50px auto;
 	width: 300px;
-	padding: 20px;
-	border-radius: 4px;
-	border: 1px dashed #aaa;
+	padding: 20px;	
+	color: #3E454C;
+	background-color: #FFF6E5;
+}
+#login_container input{
+	margin-top: 10px;
 }
 #register_container{
-	margin: auto;
+	margin: 50px auto;
 	width: 300px;
 	padding: 20px;
-	border-radius: 4px;
-	border: 1px dashed #aaa;
+	color: #3E454C;
+	background-color: #FFF6E5;	
+	
+}
+#register_container input{
+	margin-top: 10px;
 }
 #log{
 	margin-top: 40px;
@@ -21,49 +57,70 @@ body{
 #log3{
 	margin-top: 40px;
 }
+
+/*
+=================HomePage=====
+ */
 #latest_container{
-	margin: auto;
+	margin:50px auto;
 	width: 500px;
 	padding: 20px;
-	border-radius: 4px;
-	border: 1px dashed #aaa;
+	background-color: #FFF6E5;
 }
+#latest_container a{
+	color: #B9121B!important;
+}
+
 #logout{
 float: right;
 padding: 0px;
-border-bottom: 3px solid black;
 }
-.bot_bor{
-	border-bottom: 3px solid black;
-	border-radius: 5px;
-	margin-right: 3px;
-	margin-bottom: 20px;
+.sp{
+	font-size: 25px;
+	margin: 10px;
+	color: #3E454C;
+	font-family: Helvetica;
 }
-ul{
-	list-style: none;
-}
+/*
+=================Profile=====
+ */
 #prof{
 	text-align: center;
-	height: 100px;
+	height: 150px;
 	margin: 50px;
-	border-radius: 20px;
+	margin-top: 70px;
+	background-color: #3E454C;
+	color: #FFF6E5;
 }
 #edit{
 	position: absolute;
 	left: 50%;
 }
 #stats{
-	background-color: #eee;
+	background-color: #3E454C;
 	height: 200px;
 	margin: 50px;
+	color: #FF7F66;
+	padding: 20px;
 	text-align: center;
 }
+.table-bordered{
+	border:5px solid #3E454C;
+}
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td{
+	border:0px;
+}
+/*
+=================Create Poll=====
+ */
 #pollcr{
 	width: 500px;
-	margin: auto;
+	margin: 50px auto;
+	padding: 30px;
+	background-color: #FFF6E5;
 }
 .mar{
-	margin: 20px;
+	margin: 20px auto;
 }
 #search{
 	margin-left: 40px;
@@ -75,46 +132,72 @@ button{
 	margin: 10px;
 }
 #inst{
-	opacity: .7;
 	float: left;
 	width: 20%;
-	color: white;
-	margin: 20px;
+	color: #FFF6E5;
+	margin: 50px;
 	padding: 30px;
-	border-radius: 10px;
 	clear: both;
-	background-color: #505050;
+	background-color: #2185C5;
 }
+/*
+=================Poll Page=====
+ */
 #polls_container{
 
-	margin: auto;
-	width: 500px;
+	margin: 50px auto 50px;
+	width: 40%;
 	padding: 20px;
-	border-radius: 4px;
-	border: 1px dashed #aaa;
+	background-color: #FFF6E5;
+	
 }
 #my_container{
 	
 	margin: auto;
 	width: 500px;
 	padding: 20px;
-	border-radius: 4px;
-	border: 1px dashed #aaa;
-}
-a{
-	text-decoration: none!important;
 }
 #comment_inp{
 	width: 500px;
-	margin: auto;
+	margin: 5px auto 10px;
 }
 #comm{
-	background:#303030;
-	color: #428bca;
+	background-color: #FFF6E5;
+	color: #3E454C;
 	padding: 30px;
 	width: 55%;	
 	border-top-left-radius: 20px;
 	border-bottom-right-radius: 20px; 
 	margin: 30px auto;
+}
+#poll{
+	margin: 20px auto;
+	padding: 10px;
+	background-color: #FFF6E5;
+}
+#poll a{
+	color: #3E454C!important;
+}
+.btn{
+	color: #FF7F66;
+	background-color: #3E454C;
+	border:1px solid #FF7F66;
+}
+.btn:hover{
+	color: #FF7F66;
+}
+.nav-pills>li>a{
+	border-radius: 0px!important;
+	color: #FF7F66;
+}
+.nav-pills>li>a:hover{
+	opacity: 0.9;
+	background-color: #3E454C;
+}
 
+/*
+=================Ajax Image=====
+ */
+#aj_container{
+	float: right;
 }

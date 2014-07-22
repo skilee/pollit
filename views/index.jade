@@ -6,15 +6,16 @@ html
 	script(type="text/javascript",src='/javascripts/bar.js')
 	link(type="text/css",rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 	link(type="text/css",rel='stylesheet', href='/stylesheets/style.css')
+	script(type="text/javascript",src="/javascripts/analytic.js")
 	title=title
 	body
-		navbar
+		nav
 			ul(class="nav nav-pills")
-				li(id="home",class="bot_bor")
+				li(id="home")
 					a(href="/") Home
-				li(id="login",class="bot_bor")
+				li(id="login")
 					a(href="/login") Login
-				li(id="regnav",class="bot_bor")
+				li(id="regnav")
 					a(href="/register") register
 				
 		div(id="container")

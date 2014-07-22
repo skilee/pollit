@@ -6,9 +6,10 @@ html
 	script(type="text/javascript",src='/javascripts/bar.js')
 	link(type="text/css",rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 	link(type="text/css",rel='stylesheet', href='/stylesheets/style.css')
+	script(type="text/javascript",src="/javascripts/analytic.js")
 	title=title
 	body
-		navbar
+		nav
 			ul(class="nav nav-pills")
 				li(id="home",class="bot_bor")
 					a(href="/") Home
@@ -23,8 +24,8 @@ html
 				li(id="search",class="bot_bor")
 					input(class='form-control',placeholder="Search",id="search2",name="search")
 					div(id="results")
-				li(id="logout",class="btn")
+				li(id="aj_container")
+					img(src="/images/load1.gif",id="aj")
+				li(id="logout")
 					a(href="/logout") Logout
-		div(id="container")
-				img(src="/images/ajax-loader.gif",id="aj")
 			block content

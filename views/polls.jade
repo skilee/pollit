@@ -14,10 +14,10 @@ block content
 						canvas(id="myCanvas_"+i,width="400px",height="40px")
 						br
 						button(id="upVal_"+i,class="btn") #{item.up}
-						button(id="up_"+i,data-id=item._id) Yes
+						button(id="up_"+i,data-id=item._id,class="btn") Yes
 						span(id="sp_"+i)
 						button(id="downVal_"+i,class="btn") #{item.down}
-						button(id="down_"+i,data-id=item._id) No
+						button(id="down_"+i,data-id=item._id,class="btn") No
 						span(id="sp_"+i)
 						-i+=1
 						hr
