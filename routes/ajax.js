@@ -1,4 +1,5 @@
 var db;
+var pass = require('pwd');
 exports.getDb = function (database){
 	db = database;
 }
@@ -11,7 +12,7 @@ exports.search = function(req,res){
 	});
 }
 exports.edit = function(req,res){
-	db.collection('users').findOne({username:req.session.user,password:req.session.pass},function(err,doc){
-		res.send(doc);	
+	db.collection('users').findOne({username:req.session.user},function(err,user){
+			res.send(user);
 	});
 }

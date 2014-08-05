@@ -7,7 +7,7 @@ var polls = require('../routes/polls');
 var myPolls = require('../routes/myPolls');
 var ajax = require('../routes/ajax');
 var MongoClient=require('mongodb').MongoClient;
-var dbUri = 'mongodb://pollit:skillandlearn@kahana.mongohq.com:10083/pollit';
+var dbUri = 'mongodb://pollit:upoll@kahana.mongohq.com:10066/pollit'
 module.exports = MongoClient.connect(dbUri,function(err,database){
 	if(!err){
 		console.log("We are connected");

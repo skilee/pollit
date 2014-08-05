@@ -5,10 +5,10 @@ exports.getDb = function(database){
 }
 
 exports.profile = function(req,res){	
-	db.collection('users').findOne({username:req.session.user,password:req.session.pass},function(err,doc){
+	db.collection('users').findOne({username:req.session.user},function(err,doc){
 		var number;
 		if(!err){
-			var d=(new Date(doc.date)).toLocaleDateString();
+			var d = (new Date(doc.date)).toLocaleDateString();
 			db.collection('polls').count({creator:req.session.user},function(err,count){
 				if(!err){
 					//count=count.replace('<','');

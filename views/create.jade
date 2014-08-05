@@ -2,7 +2,11 @@ extends index2
 block content
 	div(id="pollcr")
 		form(method="POST",action='/create',name='register',class="col-mid-6")
-			h3 Add a poll Question, it will have Yes and No options.
+			h3 Add a poll Question, it will be Yes & No type by default.
 			input(class="form-control",type='text',class="mar",name='question',placeholder="Poll Question",required)
 			input(class="form-control",type='text',class="mar",name='tags',placeholder="Tags Here,comma separated")
+			input(class="form-control",type="text",class="mar",value="Yes",name="option_0")
+			input(class="form-control",type="text",class="mar",value="No",name="option_1")
+			button(class="btn mar",title="more options",id="addMore") add more
+			br
 			input(class="btn mar",type='Submit',value="Create")

@@ -1,12 +1,12 @@
 $(function(){
 	function Poll(id,up,down){
-		this.id=id;
-		this.up=$('#up_'+id);
-		this.down=$('#down_'+id);
-		this.upVal=typeof up!=='undefined'?up:1;
-		this.downVal=typeof down!=='undefined'?down:0;
-		this.canvas=document.getElementById('myCanvas_'+id);
-		this.ctx=this.canvas.getContext('2d');
+		this.id = id;
+		this.up = $('#up_'+id);
+		this.down = $('#down_'+id);
+		this.upVal = typeof up!=='undefined'?up:1;
+		this.downVal = typeof down!=='undefined'?down:0;
+		this.canvas = document.getElementById('myCanvas_'+id);
+		this.ctx = this.canvas.getContext('2d');
 }
 	Poll.prototype.upVote=function(i){
 		var id=this.up.data('id');
@@ -41,8 +41,8 @@ $(function(){
 	}
 	Poll.prototype.draw=function(){
 		var ctx=this.ctx;
-		var colorUp="#2185C5";
-		var colorDown="#FF7F66";
+		var colorUp="#16193B";
+		var colorDown="#ADD5F7";
 		//ctx.strokeStyle="#000000";
 		//ctx.lineWidth=2;
 		var total=this.upVal+this.downVal;

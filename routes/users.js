@@ -1,4 +1,5 @@
 var db;
+var pass = require('pwd');
 exports.getDb = function (database){
 	db = database;
 }
@@ -15,29 +16,22 @@ exports.login = function (req,res){
 
 exports.postLog = function (req,res){
 
-	var found=false;
-	var user=req.body.user;
-	var pass=req.body.pass;
-	db.collection('users').find({username:user,password:pass}).toArray(function(err,items){
+	var user = req.body.user;
+	var password = req.body.pass;
+	db.collection('users').findOne({username:user},function(err,user){
 		if(!err){
-			for(var i=0;i<items.length;i++){
-				if(items[i].username==user&&items[i].password==pass){
-					found = true;
-					req.session.user=items[i].username;
-					req.session.pass=items[i].password;
+			pass.hash(password, user.salt, function(err,hash){
+				if(user.hash == hash){
+					req.session.user = user.username;
+					res.redirect('profile');
 				}
-			}
-			}else{
-				console.log(err);
-			}
-			if(found==true){
-				res.redirect('/profile');
-			}else{
-				res.redirect('/login');
-			}
-			
-		
+				else{
+					res.redirect('login');
+				}
+			});
+		}
 	});
+
 }
 exports.reg = function (req,res){
 
@@ -47,14 +41,19 @@ exports.reg = function (req,res){
 exports.regPost = function (req,res){
 
 	var user={
-		username:req.body.user,
-		password:req.body.pass,
-		email:req.body.email,
-		date:(new Date()).toJSON(),
-		mypollsUp:[' '],
-		mypollsDown:[' ']
+
 	}
-	db.collection('users').insert(user,function(err,result){
+
+	var password = req.body.pass;
+	pass.hash(password,function(err,salt,hash){
+		user.salt = salt;
+		user.hash = hash;
+		user.username = req.body.user;
+		user.email = req.body.email;
+		user.date = (new Date()).toJSON();
+		user.mypollsUp = [' '];
+		user.mypollsDown = [' '];
+		db.collection('users').insert(user,function(err,result){
 		if(err){
 			res.send(err);
 		}
@@ -62,11 +61,15 @@ exports.regPost = function (req,res){
 			res.redirect('login');
 		}
 	});
+		
+	});
+
+	
 }
 exports.userCheck = function(req,res){
 	var user=req.query.username;
 	db.collection('users').find({username:user}).toArray(function(err,users){
-		if (users.length==0) {
+		if (users.length == 0) {
 			res.send('')
 		}else{
 			res.send(' ');

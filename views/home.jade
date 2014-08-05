@@ -5,18 +5,29 @@ block content
 	div(id="latest_container")
 		h2 Latest Polls Come Here
 		-var i=0
+		-var myOptions = []
+		-var k = []
+		-for(var j=0;j<items.length;j++){
+			-k.push(0)
+			-myOptions.push([])
+			-for(item in items[j]){
+				-var a = item.split('_')
+				-if(a.length===2&&k[j]<(Object.keys(items[j]).length-1))
+					-myOptions[j].push(items[j][item])
+				-k[j]+=1
+			-}
+		-}		
 		div(id="poll")
 			ul
 				each item in items
 					li
 						h2(id=item._id,class="question")
-							a(href='#') 
+							a(href='/polls/'+item._id) 
 								=item.question
 						canvas(id="myCanvas_"+i,width="400px",height="40px")
 						br
-						span(class="sp") Yes
-						button(id="upVal_"+i,class="btn") #{item.up}
-						span(class="sp") No
-						button(id="downVal_"+i,class="btn") #{item.down}
+						each option in myOptions[i]
+								button(class="btn")
+									=option 
 						-i+=1
 						hr

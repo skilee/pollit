@@ -1,7 +1,7 @@
 var express = require('express');
-var app=express();
+var app = express();
 // var cookieParser=require('cookie-parser');
-var bodyParser=require('body-parser');
+var bodyParser = require('body-parser');
 var session = require('express-session');
 var port = process.env.PORT || 3000;
 var index = require('./routes');
@@ -174,7 +174,7 @@ app.get('/polls',isLoggedIn,polls.root);
 
 
 
-app.get('/polls/:id',polls.page);
+app.get('/polls/:id',isLoggedIn,polls.page);
 
 
 

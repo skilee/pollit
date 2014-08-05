@@ -27,22 +27,13 @@ exports.create = function(req,res){
 }
 
 exports.postCreate = function(req,res){
-	var question=req.body.question;
-	var tags=req.body.tags;
-	tags = tags.toLowerCase().split(',');
+	
+	req.body.tags = req.body.tags.toLowerCase().split(',');
 	var date=(new Date()).toJSON();
 	var username=req.session.user;
-	var id;
-		
-	poll={
-		creator:username,
-		question:question,
-		createdOn:date,
-		tags:tags,
-		up:0,
-		down:0
-	}
-	db.collection('polls').insert(poll,function(err,result){
+	req.body.creator = username;
+	req.body.createdOn = date;
+	db.collection('polls').insert(req.body,function(err,result){
 		if(err){
 			res.send(err);
 		}
