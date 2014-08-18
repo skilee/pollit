@@ -18,18 +18,23 @@ exports.postLog = function (req,res){
 
 	var user = req.body.user;
 	var password = req.body.pass;
-	db.collection('users').findOne({username:user},function(err,user){
-		if(!err){
-			pass.hash(password, user.salt, function(err,hash){
-				if(user.hash == hash){
-					req.session.user = user.username;
-					res.redirect('profile');
-				}
-				else{
-					res.redirect('login');
-				}
-			});
-		}
+	db.collection('users').find({username:user}).toArray(function(err,users){
+		if(users.length==1){
+			var user = users[0];
+			if(!err){
+				pass.hash(password, user.salt, function(err,hash){
+					if(user.hash == hash){
+						req.session.user = user.username;
+						res.redirect('profile');
+					}
+					else{
+						res.redirect('login');
+					}
+				});
+			}	
+		}else{
+			res.redirect('/login');
+		}		
 	});
 
 }
@@ -51,8 +56,7 @@ exports.regPost = function (req,res){
 		user.username = req.body.user;
 		user.email = req.body.email;
 		user.date = (new Date()).toJSON();
-		user.mypollsUp = [' '];
-		user.mypollsDown = [' '];
+		user.myPollsVoted = [];
 		db.collection('users').insert(user,function(err,result){
 		if(err){
 			res.send(err);

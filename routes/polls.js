@@ -26,8 +26,12 @@ exports.create = function(req,res){
 	res.render('create');
 }
 
-exports.postCreate = function(req,res){
-	
+exports.postCreate = function(req,res){	
+	req.body.votes = [];
+	var number = req.body.optionNo;
+	for(var i=0;i<=number;i++){
+		req.body.votes.push(0);
+	}	
 	req.body.tags = req.body.tags.toLowerCase().split(',');
 	var date=(new Date()).toJSON();
 	var username=req.session.user;
@@ -41,58 +45,55 @@ exports.postCreate = function(req,res){
 			res.redirect('/mypolls');
 		}
 		});
-
+	
 }
 
-exports.up = function(req,res){
-	var mypollsUp=[];
-	var mypollsDown=[];
-	var id=req.param('id');
-	db.collection('users').findOne({username:req.session.user},function(err,user){
-		mypollsUp=user.mypollsUp;
-		mypollsDown=user.mypollsDown;
-		if(mypollsUp.indexOf(id)==-1&&mypollsDown.indexOf(id)==-1){
-			db.collection('polls').update({_id:new bson.ObjectID(id)},{$inc:{up:1}},function(err,result){
+exports.vote = function(req,res){
+	var optionNo = req.query.optionNo;  // which option_optionNo (eg: yes_1)
+	var myPollsVoted = [];	 // to check if voted before or not
+	var optionValue = req.query.option;	//yes or no...
+	optionValue = optionValue.split(' ').join('_'); //remove spaces , more consistant
+	var id = req.param('id');  // id of question
+	id = new bson.ObjectID(id); // to bson 
+	var user = req.session.user;
+	var polls = {
+		id:req.param('id'),
+		option:optionValue
+	}			
+	db.collection('users').findOne({username:user},function(err,user){
+		myPollsVoted = user.myPollsVoted;		
+		var searchTerm = req.param('id');
+		var index = -1;	
+		if(typeof myPollsVoted!="undefined"){			
+			for(var i = 0, len = myPollsVoted.length; i < len; i++) {							
+			    if (myPollsVoted[i].id === searchTerm) {			    	
+			        index = i;
+			        break;
+			    }
+			}	
+		}				
+		if(typeof myPollsVoted==="undefined" || index==-1){
+			var votes = [];
+			db.collection('polls').findOne({_id:id},function(err,poll){
+				poll.votes[optionNo]+=1;
+				votes = poll.votes;				
+				db.collection('polls').update({_id:id},{$set:{votes:votes}},function(err,result){
 				if(!err){
-					db.collection('users').update({username:req.session.user},{$push:{mypollsUp:id}},function(err,result){
+					db.collection('users').update({username:req.session.user},{$push:{myPollsVoted:polls}},function(err,result){
 							if(!err){
 								res.send(' ');
 							}
-					});
-				}
+						});
+					}else{
+						console.error(err);
+					}
+				});
 			});
 		}else{
-			res.send('');
-		}
-	
-});
-}
-
-exports.down = function(req,res){
-	var mypollsDown=[];
-	var mypollsUp=[];
-	var id=req.param('id');
-	db.collection('users').findOne({username:req.session.user},function(err,user){
-		mypollsDown=user.mypollsDown;
-		mypollsUp=user.mypollsUp;
-		if(mypollsDown.indexOf(id)==-1&&mypollsUp.indexOf(id)==-1){
-			db.collection('polls').update({_id:new bson.ObjectID(id)},{$inc:{down:1}},function(err,result){
-				if(!err){
-					db.collection('users').update({username:req.session.user},{$push:{mypollsDown:id}},function(err,result){
-							if(!err){
-								res.send(' ');
-							}
-					});
-				}
-			});
-		}else{
-			res.send('');
-		}
-	
-	});
-	
-}
-
+				res.send('');
+			}
+		});
+	}
 exports.comment = function(req,res){
 	var id=req.param('id');
 	var comment=req.query.comment;

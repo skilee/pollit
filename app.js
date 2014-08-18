@@ -10,6 +10,7 @@ var profile = require('./routes/profile');
 var polls = require('./routes/polls');
 var myPolls = require('./routes/myPolls');
 var ajax = require('./routes/ajax');
+var category = require('./routes/category');
 app.set('title','Pollit');
 app.locals.title = 'Pollit';
 
@@ -130,22 +131,12 @@ app.get('/mypolls',isLoggedIn,myPolls.root);
 
 
 //================================
-// Upvote
+// vote
 //================================
 
 
 
-app.get('/up/:id',isLoggedIn,polls.up);
-
-
-
-//================================
-// Downvote
-//================================
-
-
-
-app.get('/down/:id',isLoggedIn,polls.down);
+app.get('/vote/:id',isLoggedIn,polls.vote);
 
 
 
@@ -186,6 +177,12 @@ app.get('/polls/:id',isLoggedIn,polls.page);
 
 app.get('/comment/:id',isLoggedIn,polls.comment);
 
+
+//================================
+// Category
+//================================
+
+app.get('/category',isLoggedIn,category.all);
 
 var server = app.listen(port,function(){
 	console.log('Listening on port %d',port);

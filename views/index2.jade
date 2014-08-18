@@ -8,6 +8,7 @@ html
 	link(type="text/css",rel='stylesheet', href='/stylesheets/style.css')
 	script(type="text/javascript",src="/javascripts/analytic.js")
 	script(type="text/javascript",src="/javascripts/create.js")
+	script(type="text/javascript",src="/javascripts/sideBar.js")
 	title=title
 	body
 		nav
@@ -29,4 +30,50 @@ html
 					img(src="/images/load1.gif",id="aj")
 				li(id="logout")
 					a(href="/logout") Logout
-			block content
+		div(id="sideBar")
+			a(href="/category",id="category")
+				img(src="/images/category.png",class="sideIcon")
+				span Category
+				div(id="sideSideBar")
+					a(href="/category/science")
+						img(src="/images/science.png",class="sideIcon")
+						span Science
+					a(href="/category/religion")
+						img(src="/images/religion.png",class="sideIcon")
+						span Religion
+					a(href="/category/politics")
+						img(src="/images/politics.png",class="sideIcon")
+						span Politics
+					a(href="/category/personal")
+						br
+						img(src="/images/personal.png",class="sideIcon")
+						span Personal
+					a(href="/category/sports")
+
+						img(src="/images/sports.svg",class="sideIcon")
+						span Sports
+					a(href="/category/Humor")
+						br
+						img(src="/images/humor.png",class="sideIcon")
+						span Humor
+					a(href="/category/technology")
+						br
+						img(src="/images/technology.png",class="sideIcon")
+						span Technology
+					a(href="/category/mathematics")
+						br
+						img(src="/images/mathematics.png",class="sideIcon")
+						span Mathematics
+					a(href="/category/education")
+						br
+						img(src="/images/education.png",class="sideIcon")
+						span Education
+					a(href="/category/Interent")
+						br
+						img(src="/images/internet.png",class="sideIcon")
+						span Internet
+					a(href="/category/world")
+						br
+						img(src="/images/world.png",class="sideIcon")
+						span World
+		block content

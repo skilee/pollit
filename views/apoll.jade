@@ -1,16 +1,33 @@
 extends index2
 block content
-	div(id="polls_container")
-		h2 #{doc.question}
-		canvas(id="myCanvas_0",width="400px",height="40px")
+	div(id="poll_container")
+		-var myOptions = []
+		-for(item in doc){
+			-var a = item.split('_')
+			-if(a.length===2&&a[0]!=""){
+				-myOptions.push(doc[item])
+			-}
+		-}
+	div(id="polls_container")		
+		h2(id="title_0",data-id=doc._id,class="question") #{doc.question}
+		canvas(id="myCanvas_0")
 		br
-		button(id="upVal_0",class="btn") #{doc.up}
-		button(id="up_0",data-id=doc._id,class="btn") Yes
-		span(id="sp_0")
-		button(id="downVal_0",class="btn") #{doc.down}
-		button(id="down_0",data-id=doc._id,class="btn") No
-		span(id="sp_0")
+		div(class="0_options")
+			-var optionCounter = 0
+			each option in myOptions
+				button(class="btn", id="0_"+optionCounter)
+					=option
+				-optionCounter+=1 			
+		span(id="sp_0",class="sp")			
+		br
+		-var voteCounter = 0
+		each vote in doc.votes
+			button(class="btn",class="0_"+voteCounter)
+				=vote
+			-voteCounter+=1		
 		hr
+		h3(class="mar") Comment System is coming soon				
+//		
 	div(id="comment_container")
 		div(id="comment_inp")
 			textarea(class="form-control input",rows="5",type='textbox',name='comment',id="comment",placeholder="Leave a comment")

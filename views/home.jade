@@ -1,33 +1,46 @@
 extends index
 block content
-	div(id="inst")
-		h3 Login and vote in these polls or create your own polls.
 	div(id="latest_container")
 		h2 Latest Polls Come Here
-		-var i=0
-		-var myOptions = []
+		-var i = 0
+		-var myOptions = []//contains all options for all polls
 		-var k = []
-		-for(var j=0;j<items.length;j++){
+		-//items 3 polls at a time, all their data		
+		-myVotes = []
+		-for(var j=0;j<items.length;j++){			
+			-myVotes.push(items[j].votes);
 			-k.push(0)
 			-myOptions.push([])
 			-for(item in items[j]){
 				-var a = item.split('_')
-				-if(a.length===2&&k[j]<(Object.keys(items[j]).length-1))
+				-if(a.length===2&&k[j]<(Object.keys(items[j]).length-1)&&a[0]!=""){	
 					-myOptions[j].push(items[j][item])
+				-}				
 				-k[j]+=1
 			-}
-		-}		
+		-}
 		div(id="poll")
 			ul
 				each item in items
 					li
-						h2(id=item._id,class="question")
-							a(href='/polls/'+item._id) 
+						h2(id="title_"+i,data-id=item._id,class="question")
+							a(href='/polls/'+item._id)
 								=item.question
-						canvas(id="myCanvas_"+i,width="400px",height="40px")
+						canvas(id="myCanvas_"+i,width="400px")
 						br
-						each option in myOptions[i]
-								button(class="btn")
-									=option 
+						-var optionCounter = 0
+						div(class=i+"_"+"options")
+							each option in myOptions[i]
+									button(class="btn", id=i+"_"+optionCounter)
+										=option
+									-optionCounter+=1
+						br
+						span(id="sp_"+i,class="sp")
+						br
+						-var voteCounter = 0
+						each vote in myVotes[i]
+							button(class="btn",class=i+"_"+voteCounter)
+								=vote
+							-voteCounter+=1
 						-i+=1
 						hr

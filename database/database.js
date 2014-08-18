@@ -6,6 +6,7 @@ var profile = require('../routes/profile');
 var polls = require('../routes/polls');
 var myPolls = require('../routes/myPolls');
 var ajax = require('../routes/ajax');
+var category = require('../routes/category');
 var MongoClient=require('mongodb').MongoClient;
 var dbUri = 'mongodb://pollit:upoll@kahana.mongohq.com:10066/pollit'
 module.exports = MongoClient.connect(dbUri,function(err,database){

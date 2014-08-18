@@ -1,4 +1,5 @@
-$(function(){
+
+]	$(function(){
 	function Poll(id,up,down){
 		this.id = id;
 		this.up = $('#up_'+id);
@@ -62,8 +63,8 @@ $(function(){
 	var latest=function(){
 		var li=$('#latest_container li');
 		for(var i=0;i<li.length;i++){
-			var up=parseInt($('#upVal_'+i).text());
-			var down=parseInt($('#downVal_'+i).text());
+			var up = parseInt($('#upVal_'+i).text());
+			var down = parseInt($('#downVal_'+i).text());
 			polls[i]=new Poll(i,up,down);
 			polls[i].up.click(function(){
 				var i=$(this).attr('id').split('_')[1]; 
