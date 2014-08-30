@@ -1,6 +1,7 @@
 extends index
 block content
-	div(id="register_container")
+
+	div(id="register_container")		
 		p Create a new Account
 		form(method="POST",action='/register',name='register',id="reg")
 			input(class="form-control input",type='text',id="user",name='user',placeholder="Username",required)
@@ -11,3 +12,5 @@ block content
 			span(id="passErr")
 			<br>
 			span(id="userEx")
+			<br>
+			span(id="passLen")			

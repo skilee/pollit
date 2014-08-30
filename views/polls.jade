@@ -44,4 +44,12 @@ block content
 							-voteCounter+=1
 						-i+=1
 						hr
+			-var total = items.count
+			-var pageNo = items.pageNo
+			if pageNo>0
+				a(href="/page/"+(pageNo-1))
+					button(class="btn") Prev
+			if pageNo<(total/3-1)
+				a(href="/page/"+(pageNo+1))
+					button(class="btn") Next
 						

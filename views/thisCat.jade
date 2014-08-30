@@ -1,0 +1,9 @@
+extends index2
+block content
+	-var pollNo = polls.length
+	if pollNo!=0
+		each poll in polls
+			a(href="/polls/"+poll._id)
+				=poll.question
+	else
+		h1 No polls available

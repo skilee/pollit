@@ -18,6 +18,7 @@ module.exports = MongoClient.connect(dbUri,function(err,database){
 		polls.getDb(database);
 		myPolls.getDb(database);
 		ajax.getDb(database);
+		category.getDb(database);
 	}else{
 		console.log('Database not connected');
 	}

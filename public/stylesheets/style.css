@@ -1,5 +1,15 @@
+/*
+Color Scheme
+Dark blue(nav) #2980B9
+Light blue(latest_container) #2980B9
+white(background) #ECF0F1
+reddish-oringish #E74C3C
+very dark blue #2C3E50
+*/
+
+
 body{
-	background-color: #DAEDE2;
+	background-color: #ECF0F1;
 }
 
 ul{
@@ -8,6 +18,10 @@ ul{
 
 a{
 	text-decoration: none!important;
+}
+hr{
+	color: black;
+	 border: 0; border-top: 1px solid #ccc;
 }
 th{
 	text-align: center;
@@ -22,7 +36,7 @@ canvas{
 nav{
 	width: 100%;
 	height: 50px;
-	background-color: #EA2E49;
+	background-color: #2980B9;
 }
 /*
 =================Login and Registration=====
@@ -63,7 +77,7 @@ nav{
 	margin:50px auto;
 	width: 70%;
 	padding: 20px;
-	background-color: #EA2E49;
+	background-color: #3498DB;
 	text-align: center;
 	color: #DAEDE2;
 }
@@ -199,7 +213,7 @@ button{
 }
 .nav-pills>li>a{
 	border-radius: 0px!important;
-	color: #DAEDE2;
+	color: #ECF0F1;
 	font-size: 30px;
 }
 .nav-pills>li>a:hover,.nav-pills>li>a:active,.nav-pills>li>a:focus{
@@ -246,9 +260,9 @@ button{
  .sideIcon{
  	width: 30px;
  	height: 30px;
- 	display: inline;
- 	margin-top: 5px;
  	margin-left: 10px;
+ 	display: inline-block;
+ 	margin-top: 5px;
  }
  #sideBar span{
  	color: #DAEDE2;
@@ -257,4 +271,8 @@ button{
  }
  #sideSideBar{
  	margin-left: 50px;
+ }
+ #category_container{
+ 	width: 60%;
+ 	margin: auto;
  }

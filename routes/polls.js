@@ -8,13 +8,59 @@ exports.getDb = function(database){
 }
 
 exports.root = function(req,res){
-	db.collection('polls').find().toArray(function(err,items){
-		res.render('polls',{items:items});
-	});
+	var totalPolls;
+	var limitValue = 3;
+	db.collection('polls').find().count(function(err,count){
+		totalPolls = count;
+			db.collection('polls')
+			.find()
+			.sort({_id:-1})
+			.limit(limitValue)
+			.toArray(function(err,items){	
+				items.count = totalPolls;
+				items.pageNo = 0;					
+				res.render('polls',{items:items});
+			});
+		});
+}
+
+exports.pagination = function(req,res){
+	var totalPolls;
+	var pageNo = req.param('pageNo');
+	var limitValue = 3;
+	var toSkip = pageNo*limitValue;	
+	if(!pageNo)
+		var pageNo = 0;	
+	if(!toSkip)
+		var toSkip = 0;
+	if(pageNo>=0){
+		db.collection('polls').find().count(function(err,count){
+			totalPolls = count;
+			if((pageNo*limitValue)+toSkip>totalPolls){
+
+				pageNo = 0;
+			}	
+			db.collection('polls')
+			.find()
+			.sort({_id:-1})
+			.skip(toSkip)
+			.limit(limitValue)
+			.toArray(function(err,items){		
+				items.count = totalPolls;				
+				items.pageNo = parseInt(pageNo);		
+				res.render('polls',{items:items});
+			});			
+		});		
+	}
+	else{
+		res.send('never go full retard!');
+	}
+	
+
 }
 
 exports.page = function(req,res){
-	var id=req.param('id');
+	var id = req.param('id');
 	db.collection('comments').find({pollId:id}).sort({_id:-1}).toArray(function(err,comments){
 		db.collection('polls').findOne({_id:new bson.ObjectID(id)},function(err,doc){
 			res.render('apoll',{doc:doc,comments:comments});
@@ -32,6 +78,7 @@ exports.postCreate = function(req,res){
 	for(var i=0;i<=number;i++){
 		req.body.votes.push(0);
 	}	
+	var category = req.body.dropDown;
 	req.body.tags = req.body.tags.toLowerCase().split(',');
 	var date=(new Date()).toJSON();
 	var username=req.session.user;

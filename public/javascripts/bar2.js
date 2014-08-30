@@ -2,7 +2,7 @@ $(function(){
 function Poll(pollNo, pollOptions,id,myVotes){
 	this.pollNo = pollNo;
 	this.pollOptions = [];
-	this.upVoteVal = [];	
+	this.upVoteVal = [];
 	this.id = id.substring(1,25);		
 	for(var i = 0;i<pollOptions.length;i++){		
 		this.pollOptions[i] = pollOptions[i];					
@@ -59,7 +59,7 @@ function Poll(pollNo, pollOptions,id,myVotes){
 	var polls = [];
 
 	var home = function(){
-		var li = $('#poll li');
+		var li = $('#poll li');		
 		for(var i = 0,n = li.length; i < n; i++){
 			if(i<li.length){
 				var options = $('.'+i+'_options');			
@@ -90,8 +90,8 @@ function Poll(pollNo, pollOptions,id,myVotes){
 	var all = function(){
 		var li = $('#poll li');		
 		for(var i = 0,n = li.length; i < n; i++){
-					//li.length gives 2
-			if(i!=li.length){
+			if(i<li.length){
+			
 				var options = $('.'+i+'_options');			
 				var id = $('#title_'+i).data('id');									
 				var myPollOptions = [];	
@@ -101,9 +101,8 @@ function Poll(pollNo, pollOptions,id,myVotes){
 					var vote = $('.'+i+'_'+j);			
 					myPollOptions.push(option);
 					myVotes.push(vote);
-				}
-			
-					polls[i] = new Poll(i,myPollOptions,id,myVotes);						
+				}			
+				polls[i] = new Poll(i,myPollOptions,id,myVotes);						
 				for(var k = 0,n = polls[i].pollOptions.length;k<n;k++){							
 					polls[i].pollOptions[k].click(function(){
 						var arr = $(this).attr('id').split('_');
@@ -198,5 +197,10 @@ function Poll(pollNo, pollOptions,id,myVotes){
 	
 	if(top.location.pathname === '/polls'){
 		window.onLoad = all();
+	}
+	var last2 = top.location.pathname.split('/');
+	last2 = last2[last2.length-1];
+	if(top.location.pathname === '/page/'+last2){
+		window.onLoad = home();
 	}
 });	

@@ -16,5 +16,8 @@
     "newrelic": "*",
     "nodemon": "*",
     "pwd": "0.0.4"
+  },
+  "devDependencies": {
+    "node-dev": "^2.3.0"
   }
 }

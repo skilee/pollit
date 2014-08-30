@@ -10,4 +10,10 @@ block content
 			button(class="btn mar",title="more options",id="addMore") add more
 			input(name="optionNo",value="1" hidden="true",id="hidd")
 			br
+			-var categories = ['Science','Religion','Politics','Personal','Sports','Humor','Technology','Mathematics','Education','Internet','World']
+			select(name="category")
+				each category in categories
+					option(value=category)
+						= category
+			br
 			input(class="btn mar",type='Submit',value="Create")

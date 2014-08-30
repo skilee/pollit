@@ -1,0 +1,17 @@
+html
+	body
+		#body
+			h2 API
+			#apiLeft
+				-list1 = ['/','GET /login','GET /register']
+				ol
+					each item in list1
+						li
+							=item
+				hr
+				-list2 = ['3 latest polls','name=user,name=pass , POST to /login', '']
+			#apiRight
+				ol
+					each item in list2
+						li
+							=item

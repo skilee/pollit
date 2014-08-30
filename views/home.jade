@@ -1,5 +1,5 @@
 extends index
-block content
+block content	
 	div(id="latest_container")
 		h2 Latest Polls Come Here
 		-var i = 0
@@ -43,4 +43,13 @@ block content
 								=vote
 							-voteCounter+=1
 						-i+=1
-						hr
+							hr
+			-var total = items.count/3|0
+			-var pageNo = items.pageNo			
+			if pageNo>0
+				a(href="/page/"+(pageNo-1))
+					button(class="btn") Prev
+			if pageNo<(total/3)
+				a(href="/page/"+(pageNo+1))
+					button(class="btn") Next
+			

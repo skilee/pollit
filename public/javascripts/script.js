@@ -15,45 +15,63 @@ $(document)
 	//		Register
 	//======================
 if(top.location.pathname==='/register'){
-	$()
 	var pass;
 	var con_pass;
-	var flag=0;
+	var flag = 0;
+	var flag2 = 0;
+	var flag3 = 0;
+	var passLength;
 	$('#user').on('input',function(){
-		user=$('#user').val();
-		var parameter={username:user};
-		var userAj=$.get('/usercheck',parameter,function(data){
+		user = $('#user').val();
+		var parameter = {username:user};
+		var userAj = $.get('/usercheck',parameter,function(data){
 			if(data.length==0){
-				$('#userEx').text('Username Available').show().fadeOut( 1000 );
-				flag=0;
+				$('#userEx').text('Username Available').show();
+				flag = 0;
 			}
 			else{
-				$('#userEx').text('Username already taken :(').show();
+				$('#userEx').text('Username already taken').show();
 					flag=1;
 			}
 		});
 	});
 	$('#pass').on('input',function(){
 		pass=$('#pass').val();
-		if(con_pass===pass){
-			$('#passErr').text('Passwords do not match!').show().fadeOut( 1000 );
-
+		passLength = pass.length;		
+		if(passLength<8){
+			$('#passLen').text('Password length > 8').show();			
+			flag2 = 1;
+		}else{
+			$('#passLen').hide();
+			flag2 = 0;
 		}
+			
 	});
 	$('#con_pass').on('input',function(){
 		con_pass=$('#con_pass').val();
 		if(con_pass!=pass){			
 			$('#passErr').text('Passwords do not match!').show();
+			flag3 = 1;
 		}
 		else{			
-			$('#passErr').text('Passwords do not match!').show().fadeOut( 1000 );
+			$('#passErr').hide();
+			flag3 = 0;
 		}
 	});
 	
 	$('#reg').submit(function(e){
-		if(flag!=0){
+		if(flag!=0&&flag2!=0&&flag3!=0){
 			e.preventDefault();
-			$('#userEx').text('Change that username, its already taken').show();
+			if(flag!=0){
+				$('#userEx').text('Change that username, its already taken').show();
+			}
+			if(flag2!=0){
+				$('#passLen').text('Password length > 8').show();
+			}
+			if(flag3!=0){
+				$('#passErr').text('Passwords do not match!').show();	
+			}
+				
 		}
 		if(con_pass!=pass){
 			e.preventDefault();

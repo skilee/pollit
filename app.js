@@ -14,7 +14,6 @@ var category = require('./routes/category');
 app.set('title','Pollit');
 app.locals.title = 'Pollit';
 
-
 //================================
 // Middleware
 //================================
@@ -47,6 +46,7 @@ var database = require('./database/database');
 //================================
 
 app.get('/',index.root);
+app.get('/page/:pageNo',index.page);
 
 
 //================================
@@ -156,6 +156,7 @@ app.get('/mypolls/rem/:id',isLoggedIn,myPolls.remove);
 
 
 app.get('/polls',isLoggedIn,polls.root);
+app.get('/polls/pages/:pageNo',isLoggedIn,polls.pagination);
 
 
 
@@ -183,6 +184,18 @@ app.get('/comment/:id',isLoggedIn,polls.comment);
 //================================
 
 app.get('/category',isLoggedIn,category.all);
+
+app.get('/category/:catName',isLoggedIn,category.this);
+
+
+//================================
+// API
+//================================
+
+app.get('/api',function(req,res){
+	res.render('api');
+
+});
 
 var server = app.listen(port,function(){
 	console.log('Listening on port %d',port);
