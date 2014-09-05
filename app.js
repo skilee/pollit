@@ -28,9 +28,10 @@ app.set('view engine', 'jade');
 var isLoggedIn = function(req, res, next) {
   if (req.session && req.session.user)
     next(); // user logged in, so pass
-  else
-    res.redirect('/login'); // not logged in, redirect to login page
-};	
+  else{
+  	res.redirect('/'); // not logged in, redirect to login page
+  }    
+};
 
 
 
@@ -53,11 +54,8 @@ app.get('/page/:pageNo',index.page);
 // Users.js
 //================================
 
-
-
-app.get('/login',users.login);
-app.post('/login',users.postLog);
-app.post('/register',users.regPost);
+app.post('/login',ajax.login);
+app.post('/register',ajax.register);
 app.get('/register',users.reg);
 app.get('/usercheck',users.userCheck);
 
@@ -195,6 +193,15 @@ app.get('/category/:catName',isLoggedIn,category.this);
 app.get('/api',function(req,res){
 	res.render('api');
 
+});
+
+
+//================================
+// 404 page
+//================================
+
+app.get('*',function(req,res){
+	res.send('What you playin at! With great power comes great responsibility <br><br><br><a href="/">Back!<a/>');
 });
 
 var server = app.listen(port,function(){

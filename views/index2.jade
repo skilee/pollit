@@ -6,32 +6,35 @@ html
 	script(type="text/javascript",src='/javascripts/bar2.js')
 	link(type="text/css",rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 	link(type="text/css",rel='stylesheet', href='/stylesheets/style.css')
+	link(type="text/css",rel='stylesheet', href='/stylesheets/style2.css')
 	script(type="text/javascript",src="/javascripts/analytic.js")
 	script(type="text/javascript",src="/javascripts/create.js")
 	script(type="text/javascript",src="/javascripts/sideBar.js")
 	title=title
 	body
-		nav
-			ul(class="nav nav-pills")
-				li(id="home",class="bot_bor")
-					a(href="/") Home
-				li(id="polls",class="bot_bor")
-					a(href="/polls") Polls
-				li(id="profile",class="bot_bor")
-					a(href="/profile") Profile
-				li(id="createpoll",class="bot_bor")
-					a(href="/create") Create Poll
-				li(id="mypoll",class="bot_bor")
-					a(href="/mypolls") My Polls					
-				li(class='bot_bor')
-					a(href="/category") Category
-				li(id="search",class="bot_bor")
-					input(class='form-control',placeholder="Search",id="search2",name="search")
-					div(id="results")
-				li(id="aj_container")
-					img(src="/images/load1.gif",id="aj")
-				li(id="logout")
-					a(href="/logout") Logout
+
+		//- nav
+		//- 	ul(class="nav nav-pills")
+		//- 		li(id="home",class="bot_bor")
+		//- 			a(href="/") Home
+		//- 		li(id="polls",class="bot_bor")
+		//- 			a(href="/polls") Polls
+		//- 		li(id="profile",class="bot_bor")
+		//- 			a(href="/profile") Profile
+		//- 		li(id="createpoll",class="bot_bor")
+		//- 			a(href="/create") Create Poll
+		//- 		li(id="mypoll",class="bot_bor")
+		//- 			a(href="/mypolls") My Polls					
+		//- 		li(class='bot_bor')
+		//- 			a(href="/category") Category
+		//- 		li(id="search",class="bot_bor")
+		//- 			input(class='form-control',placeholder="Search",id="search2",name="search")
+		//- 			div(id="results")
+		//- 		li(id="aj_container")
+		//- 			img(src="/images/load1.gif",id="aj")
+		//- 		li(id="logout")
+		//- 			a(href="/logout") Logout
+
 		div(id="sideBar")
 			a(href="/category",id="category")
 				img(src="/images/category.png",class="sideIcon")
@@ -78,4 +81,19 @@ html
 						br
 						img(src="/images/world.png",class="sideIcon")
 						span World
+		.container
+			#head.row.col-sm-12.col-xs-12.col-md-12
+				#logo.col-sm-3.col-md-1.col-xs-4.col-md-offset-3
+					img(src='/images/1.jpg', width='100%')
+				#nav.col-sm-9.col-md-7.col-xs-8
+					#home.tip(title='Go Home')
+						a(href="/")
+							span.fa.fa-home
+							| Home
+					#log.tip(title='Login to your polls')
+						span.fa.fa-user
+						| Login
+					#reg.tip(title='Register to the world of polls')
+						span.fa.fa-users
+						| Register							
 		block content

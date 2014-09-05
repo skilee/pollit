@@ -1,0 +1,174 @@
+!!! 5
+html(lang='en')
+head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width initial-scale=1')
+    meta(name='description', content='Pollit - a website for the benefit for humanity')
+    meta(name='keywords', content='Pollit,poll,votes,fun,wow,amaze')
+    meta(name='author', content='pikle6')
+    meta(property='og:title', content='Pollit')
+    meta(property='og:url', content='http://pollit.in')
+    meta(property='og:description', content='Pollit - a website for the benefit for humanity')
+    meta(property='og:image', content='http://pollit.in/img/favicon.png')
+    link(rel='stylesheet', type='text/css', href='css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='css/font-awesome.min.css')
+    link(rel='stylesheet', type='text/css', href='css/style.css')
+    link(rel='shortcut icon', href='img/favicon.ico')
+    script(src='js/jquery-1.11.1.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/machine.js')
+    title Pollit
+  body
+    #mask
+      br
+      br
+      img(src='img/mask.gif')
+      | Pollit is loading now
+    #login_modal.modal.fade.mdl(tab-index='-1', role='dialog', aria-labelledby='login', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          | '
+          .modal-header
+            h4#login.modal-title Login
+          .modal-body
+            .input-group
+              span.input-group-addon Username
+              input#mkdir_name.form-control(type='text')
+            br
+            .input-group
+              span.input-group-addon Password
+              input#mkdir_id.form-control(type='password')
+          .modal-footer
+            #mkdir_statbar.pull-left.control-no-click
+              i#mkdir_bug.fa.fa-bug.fa-2x.blue
+              | Status:
+              #mkdir_stat.control-no-click
+            button#login_close.btn.btn-danger(type='button') Close
+            button#login_register.btn.btn-primary(type='button') Register
+            button#login_submit.btn.btn-primary(type='button') Login
+    #reg_modal.modal.fade.mdl(tab-index='-1', role='dialog', aria-labelledby='register', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          | '
+          .modal-header
+            h4#Register.modal-title Register
+          .modal-body
+            .input-group
+              span.input-group-addon Username
+              input#mkdir_name.form-control(type='text')
+            br
+            .input-group
+              span.input-group-addon Password
+              input#mkdir_name.form-control(type='password')
+            br
+            .input-group
+              span.input-group-addon Email
+              input#mkdir_name.form-control(type='text')
+            br
+          .modal-footer
+            #mkdir_statbar.pull-left.control-no-click
+              i#mkdir_bug.fa.fa-bug.fa-2x.blue
+              | Status:
+              #mkdir_stat.control-no-click
+            button#reg_close.btn.btn-danger(type='button') Close
+            button#reg_submit.btn.btn-primary(type='button') Register
+    .container
+      #head.row.col-sm-12.col-xs-12.col-md-12
+        #logo.col-sm-3.col-md-1.col-xs-4.col-md-offset-3
+          img(src='img/1.jpg', width='100%')
+        #nav.col-sm-9.col-md-7.col-xs-8
+          #home.tip(title='Go Home')
+            span.fa.fa-home
+            | Home
+          #log.tip(title='Login to your polls')
+            span.fa.fa-user
+            | Login
+          #reg.tip(title='REgister to the world of polls')
+            span.fa.fa-users
+            | Register
+      #pollit.col-sm-10.col-md-10.col-xs-10.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+        #pol_id_1.col-sm-10.col-md-10.col-xs-10.col-md-offset-1.col-xs-offset-1.col-sm-offset-1.poll
+          .question
+            span.fa.fa-bug.purp
+            | Can we edit polls ?
+          .options
+            #pol_id_1_o_1.row
+              .col-sm-1.col-md-1.col-xs-1.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+                span.fa.fa-cube
+              .col-sm-8.col-md-8.col-xs-8(style='margin-top: 15px;')
+                .progress
+                  .progress-bar(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%; background: #e74c3c;')
+                    | Yes 60%
+              .col-sm-1.col-md-1.col-xs-1
+                span.fa.fa-dot-circle-o.tip(title='Click to vote')
+            #pol_id_1_o_1.row
+              .col-sm-1.col-md-1.col-xs-1.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+                span.fa.fa-cube
+              .col-sm-8.col-md-8.col-xs-8(style='margin-top: 15px;')
+                .progress
+                  .progress-bar(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%; background: #27ae60;')
+                    | No 20%
+              .col-sm-1.col-md-1.col-xs-1
+                span.fa.fa-dot-circle-o.tip(title='Click to vote')
+            #pol_id_1_o_1.row
+              .col-sm-1.col-md-1.col-xs-1.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+                span.fa.fa-cube
+              .col-sm-8.col-md-8.col-xs-8(style='margin-top: 15px;')
+                .progress
+                  .progress-bar(role='progressbar', aria-valuenow='90', aria-valuemin='0', aria-valuemax='100', style='width: 90%; background: #1abc9c;')
+                    | Much Amaze 90%
+              .col-sm-1.col-md-1.col-xs-1
+                span.fa.fa-dot-circle-o.tip(title='Click to vote')
+            #pol_id_1_o_1.row
+              .col-sm-1.col-md-1.col-xs-1.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+                span.fa.fa-cube
+              .col-sm-8.col-md-8.col-xs-8(style='margin-top: 15px;')
+                .progress
+                  .progress-bar(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%; background: #34495e;')
+                    | You SleepYY - 80%
+              .col-sm-1.col-md-1.col-xs-1
+                span.fa.fa-dot-circle-o.tip(title='Click to vote')
+        div
+          #pol_id_1.col-sm-10.col-md-10.col-xs-10.col-md-offset-1.col-xs-offset-1.col-sm-offset-1.poll
+            .question
+              span.fa.fa-bug.purp
+              | Can we edit polls ?
+            .options
+              #pol_id_1_o_1.row
+                .col-sm-1.col-md-1.col-xs-1.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+                  span.fa.fa-cube
+                .col-sm-8.col-md-8.col-xs-8(style='margin-top: 15px;')
+                  .progress
+                    .progress-bar(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%; background: #e74c3c;')
+                      | Yes 60%
+                .col-sm-1.col-md-1.col-xs-1
+                  span.fa.fa-dot-circle-o.tip(title='Click to vote')
+              #pol_id_1_o_1.row
+                .col-sm-1.col-md-1.col-xs-1.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+                  span.fa.fa-cube
+                .col-sm-8.col-md-8.col-xs-8(style='margin-top: 15px;')
+                  .progress
+                    .progress-bar(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%; background: #27ae60;')
+                      | No 20%
+                .col-sm-1.col-md-1.col-xs-1
+                  span.fa.fa-dot-circle-o.tip(title='Click to vote')
+              #pol_id_1_o_1.row
+                .col-sm-1.col-md-1.col-xs-1.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+                  span.fa.fa-cube
+                .col-sm-8.col-md-8.col-xs-8(style='margin-top: 15px;')
+                  .progress
+                    .progress-bar(role='progressbar', aria-valuenow='90', aria-valuemin='0', aria-valuemax='100', style='width: 90%; background: #1abc9c;')
+                      | Much Amaze 90%
+                .col-sm-1.col-md-1.col-xs-1
+                  span.fa.fa-dot-circle-o.tip(title='Click to vote')
+              #pol_id_1_o_1.row
+                .col-sm-1.col-md-1.col-xs-1.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+                  span.fa.fa-cube
+                .col-sm-8.col-md-8.col-xs-8(style='margin-top: 15px;')
+                  .progress
+                    .progress-bar(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%; background: #34495e;')
+                      | You SleepYY - 80%
+                .col-sm-1.col-md-1.col-xs-1
+                  span.fa.fa-dot-circle-o.tip(title='Click to vote')
+          div

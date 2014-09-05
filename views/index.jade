@@ -1,22 +1,93 @@
 doctype html
-html
+html(lang='en')
 	head
+	meta(charset='UTF-8')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge')
+	meta(name='viewport', content='width=device-width initial-scale=1')
+	meta(name='description', content='Pollit - a website for the benefit for humanity')
+	meta(name='keywords', content='Pollit,poll,votes,fun,wow,amaze')
+	meta(name='author', content='pikle6')
+	meta(property='og:title', content='Pollit')
+	meta(property='og:url', content='http://pollit.in')
+	meta(property='og:description', content='Pollit - a website for the benefit for humanity')
+	meta(property='og:image', content='pollit.in/images/favicon.png')
 	script(type="text/javascript",src='/javascripts/jquery-2.0.3.min.js')
+	link(rel='stylesheet', type='text/css', href='/stylesheets/font-awesome.min.css')
+	link(rel='stylesheet', type='text/css', href='/stylesheets/style.css')
+	link(rel='shortcut icon', href='images/favicon.ico')
+	link(type="text/css",rel='stylesheet',href='/stylesheets/bootstrap.min.css')
+	link(type="text/css",rel='stylesheet',href='/stylesheets/style.css')
 	script(type="text/javascript",src='/javascripts/script.js')
 	script(type="text/javascript",src='/javascripts/bar2.js')
-	link(type="text/css",rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-	link(type="text/css",rel='stylesheet', href='/stylesheets/style.css')
+	script(src='/javascripts/bootstrap.min.js')
+	script(src='/javascripts/machine.js')
 	script(type="text/javascript",src="/javascripts/analytic.js")
 	title=title
 	body
-		nav
-			ul(class="nav nav-pills")
-				li(id="home")
-					a(href="/") Home
-				li(id="login")
-					a(href="/login") Login
-				li(id="regnav")
-					a(href="/register") Register
-				
-		div(id="container")
+		#error
+			if error
+				h1 error
+		//- #mask
+		//- 	br
+		//- 	br
+		//- 	img(src='/images/mask.gif')
+		//- 	| Pollit is loading now
+		#login_modal.modal.fade.mdl(tab-index='-1', role='dialog', aria-labelledby='login', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					.modal-header
+						h4#login.modal-title Login
+					.modal-body
+						.input-group
+							span.input-group-addon Username
+							input#username.form-control(type='text',name='user',placeholder="Username",required)
+						br
+						.input-group
+							span.input-group-addon Password
+							input#password.form-control(type='password',name='pass',placeholder="Password",required)
+					.modal-footer
+						button#login_submit.btn.btn-primary(type='button') Login
+						button#login_close.btn.btn-danger(type='button') Close
+		#reg_modal.modal.fade.mdl(tab-index='-1', role='dialog', aria-labelledby='register', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					.modal-header
+						h4#Register.modal-title Register
+					.modal-body
+						.input-group
+							span.input-group-addon Username
+							input#regUsername.form-control(type='text')
+						br
+						.input-group
+							span.input-group-addon Password
+							input#regPassword.form-control(type='password')
+						br
+						.input-group
+							span.input-group-addon Confirm-Password
+							input#regConPassword.form-control(type='password')
+						br
+						.input-group
+							span.input-group-addon Email
+							input#email.form-control(type='email')
+						br
+					.modal-footer
+						#mkdir_statbar.pull-left.control-no-click
+							#mkdir_stat.control-no-click
+						button#reg_submit.btn.btn-primary(type='button') Register
+						button#reg_close.btn.btn-danger(type='button') Close
+		.container
+			#head.row.col-sm-12.col-xs-12.col-md-12
+				#logo.col-sm-3.col-md-1.col-xs-4.col-md-offset-3
+					img(src='/images/1.jpg', width='100%')
+				#nav.col-sm-9.col-md-7.col-xs-8
+					#home.tip(title='Go Home')
+						a(href="/")
+							span.fa.fa-home
+							| Home
+					#log.tip(title='Login to your polls')
+						span.fa.fa-user
+						| Login
+					#reg.tip(title='Register to the world of polls')
+						span.fa.fa-users
+						| Register			
 			block content

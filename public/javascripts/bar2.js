@@ -28,6 +28,7 @@ function Poll(pollNo, pollOptions,id,myVotes){
 	}
 	var widthFull = 600;
 	Poll.prototype.draw = function(){
+		var colorList = ['#e74c3c','#27ae60','#34495e','#1abc9c'];
 		var ctx = this.ctx;
 		var colorUp = [];
 		if(patt.test(top.location.pathname)){
@@ -36,7 +37,7 @@ function Poll(pollNo, pollOptions,id,myVotes){
 			}
 		}else{
 			for(var i = 0;i<this.pollOptions.length;i++){
-				colorUp[i] = '#FA'+(i+1)+'E'+(i+1)+'9';
+				colorUp[i] = colorList[i%(colorList.length)];
 			}
 		}
 		var total = 0;
@@ -45,10 +46,12 @@ function Poll(pollNo, pollOptions,id,myVotes){
 
 		}			
 		var widthRect = [];
-		ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);		
 		for(var i = 0;i<this.pollOptions.length;i++){
+			ctx.fillStyle = "#ffffff";
+			ctx.fillRect(0, i*30, this.canvas.width, 25);			
 			ctx.fillStyle = colorUp[i];
-			widthRect[i] = widthFull*(this.upVoteVal[i]/total);
+			widthRect[i] = widthFull*(this.upVoteVal[i]/total);			
 			ctx.fillRect(0,i*30,widthRect[i],25);
 			ctx.fillStyle = "#000";
 			ctx.font = "20px Arial";
@@ -59,31 +62,29 @@ function Poll(pollNo, pollOptions,id,myVotes){
 	var polls = [];
 
 	var home = function(){
-		var li = $('#poll li');		
-		for(var i = 0,n = li.length; i < n; i++){
-			if(i<li.length){
-				var options = $('.'+i+'_options');			
-				var id = $('#title_'+i).data('id');									
+		var li = $('#poll li');
+		for(var i = 0; i<li.length; i++){
+				var options = $('.'+i+'_options');
+				var id = $('#title_'+i).data('id');
 				var myPollOptions = [];	
 				var myVotes = [];	
 				for(var j=0;j<options.children().length;j++){
 					var option = $('#'+i+'_'+j);
-					var vote = $('.'+i+'_'+j);			
+					var vote = $('.'+i+'_'+j);
 					myPollOptions.push(option);
 					myVotes.push(vote);
-				}
-				polls[i] = new Poll(i,myPollOptions,id,myVotes);						
-				for(var k = 0,n = polls[i].pollOptions.length;k<n;k++){							
+				}				
+				polls[i] = new Poll(i,myPollOptions,id,myVotes);
+				for(var k = 0;k<polls[i].pollOptions.length;k++){					
 					polls[i].pollOptions[k].click(function(){
 						var arr = $(this).attr('id').split('_');
-						var i = arr[0];//poll					
+						var i = arr[0];//poll
 						var j = arr[1];//option of poll
-						polls[i].vote(i,j);						
-						this.disabled = true;									
+						polls[i].vote(i,j);
+						this.disabled = true;
 					});
 				}
 				polls[i].draw();
-			}
 		}	
 	}
 

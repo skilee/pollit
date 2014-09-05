@@ -1,13 +1,14 @@
 extends index
 block content	
 	div(id="latest_container")
+		br
 		h2 Latest Polls Come Here
 		-var i = 0
 		-var myOptions = []//contains all options for all polls
 		-var k = []
-		-//items 3 polls at a time, all their data		
+		-//items 3 polls at a time, all their data
 		-myVotes = []
-		-for(var j=0;j<items.length;j++){			
+		-for(var j=0;j<items.length;j++){
 			-myVotes.push(items[j].votes);
 			-k.push(0)
 			-myOptions.push([])
@@ -15,41 +16,49 @@ block content
 				-var a = item.split('_')
 				-if(a.length===2&&k[j]<(Object.keys(items[j]).length-1)&&a[0]!=""){	
 					-myOptions[j].push(items[j][item])
-				-}				
+				-}
 				-k[j]+=1
 			-}
 		-}
+
+		-var optionCounter = 0
 		div(id="poll")
 			ul
 				each item in items
+					-var voteCounter = 0
+					-var optionCounter = 0
 					li
-						h2(id="title_"+i,data-id=item._id,class="question")
-							a(href='/polls/'+item._id)
-								=item.question
-						canvas(id="myCanvas_"+i,width="400px")
-						br
-						-var optionCounter = 0
-						div(class=i+"_"+"options")
-							each option in myOptions[i]
-									button(class="btn", id=i+"_"+optionCounter)
-										=option
-									-optionCounter+=1
-						br
-						span(id="sp_"+i,class="sp")
-						br
-						-var voteCounter = 0
-						each vote in myVotes[i]
-							button(class="btn",class=i+"_"+voteCounter)
-								=vote
-							-voteCounter+=1
+						#pollit.col-sm-10.col-md-10.col-xs-10.col-md-offset-1.col-xs-offset-1.col-sm-offset-1
+							#pol_id_1.col-sm-10.col-md-10.col-xs-10.col-md-offset-1.col-xs-offset-1.col-sm-offset-1.poll
+								.question
+									a(href="/polls/"+item._id)
+										h2(class="fa purp" id="title_"+i,data-id=item._id)
+											=item.question
+								canvas(id="myCanvas_"+i,width="400px")
+								br
+								div(class=i+"_"+"options")
+									each option in myOptions[i]
+											button(class="btn myBtn", id=i+"_"+optionCounter)
+												=option
+											-optionCounter+=1
+								br
+								span(id="sp_"+i,class="sp")
+								br
+								each vote in myVotes[i]
+									button(class="btn voteNo",class=i+"_"+voteCounter)
+										=vote
+									-voteCounter+=1
+
 						-i+=1
-							hr
 			-var total = items.count/3|0
-			-var pageNo = items.pageNo			
-			if pageNo>0
-				a(href="/page/"+(pageNo-1))
-					button(class="btn") Prev
-			if pageNo<(total/3)
-				a(href="/page/"+(pageNo+1))
-					button(class="btn") Next
+			-var pageNo = items.pageNo
 			
+			div(class="pagination")
+				if pageNo>0				
+					a(href="/page/"+(pageNo-1))
+						button(class="btn paginationBtn") Prev
+					a(href="/page/0")
+						button(class="btn paginationBtn") 0				
+				if pageNo<=(total/3)
+					a(href="/page/"+(pageNo+1))
+						button(class="btn paginationBtn") Next

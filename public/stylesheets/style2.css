@@ -1,0 +1,278 @@
+/*
+Color Scheme
+Dark blue(nav) #2980B9
+Light blue(latest_container) #2980B9
+white(background) #ECF0F1
+reddish-oringish #E74C3C
+very dark blue #2C3E50
+*/
+
+
+body{
+	background-color: #ECF0F1;
+}
+
+ul{
+	list-style: none;
+}
+
+a{
+	text-decoration: none!important;
+}
+hr{
+	color: black;
+	 border: 0; border-top: 1px solid #ccc;
+}
+th{
+	text-align: center;
+	color: #16193B;
+}
+canvas{
+	width:90%;
+}
+/*
+=================Navigation=====
+ */
+nav{
+	width: 100%;
+	height: 50px;
+	background-color: #2980B9;
+}
+/*
+=================Login and Registration=====
+ */
+#login_container{
+	margin: 50px auto;
+	width: 300px;
+	padding: 20px;	
+	color: #3E454C;
+	background-color: #FFF6E5;
+}
+#login_container input{
+	margin-top: 10px;
+}
+#register_container{
+	margin: 50px auto;
+	width: 300px;
+	padding: 20px;
+	color: #3E454C;
+	background-color: #FFF6E5;	
+	
+}
+#register_container input{
+	margin-top: 10px;
+}
+#log{
+	margin-top: 40px;
+}
+#log3{
+	margin: auto;
+	margin-top: 40px;
+}
+
+/*
+=================HomePage=====
+ */
+#latest_container{
+	margin:50px auto;
+	width: 70%;
+	padding: 20px;
+	background-color: #3498DB;
+	text-align: center;
+	color: #DAEDE2;
+}
+
+#poll{
+	margin: 20px auto;
+	padding: 10px;
+	background-color: #FFF6E5;
+}
+#poll a{
+/*
+   -webkit-text-fill-color: #DAEDE2;
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: #EA2E49;*/
+   color: #EA2E49;
+
+}
+#logout{
+float: right;
+padding: 0px;
+}
+.sp{
+	font-size: 25px;
+	margin: 10px;
+	color: #3E454C;
+	font-family: Helvetica;
+}
+
+
+/*
+=================Profile=====
+ */
+#prof{
+	text-align: center;
+	height: 150px;
+	margin-left: 250px;
+	margin-top: 70px;
+	background-color: #EA2E49;
+	color: #FFF6E5;
+}
+#edit{
+	position: absolute;
+	left: 50%;
+}
+#stats{
+	background-color: #FFF6E5;
+	height: 200px;
+	margin-top: 30px;
+	margin-left: 420px;
+	color: #EA2E49;
+	padding: 20px;
+	text-align: center;
+}
+.table-bordered{
+	border:5px solid #3E454C;
+}
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td{
+	border:0px;
+}
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th{
+	background-color: #DAEDE2;
+}
+/*
+=================Create Poll=====
+ */
+#pollcr{
+	width: 500px;
+	margin: 50px auto;
+	padding: 30px;
+	background-color: #FFF6E5;
+}
+.mar{
+	margin: 20px auto;
+}
+#search>input{
+	border-radius: 0px!important;
+	margin-left: 40px;
+}
+.hide{
+	display: none;
+}
+button{
+	margin: 10px;
+}
+#inst{
+	position: absolute;
+	left: 0px;
+	width: 20%;
+	color: #EA2E49;
+	margin: 50px;
+	padding: 30px;
+	clear: both;
+}
+/*
+=================Poll Page=====
+ */
+#polls_container{
+	color: #333745;
+	margin: 50px auto 50px;
+	width: 70%;
+	padding: 20px;
+	background-color: #EA2E49;
+	
+}
+#my_container{
+	
+	margin: auto;
+	width: 70%;
+	padding: 20px;
+}
+#comment_inp{
+	width: 500px;
+	margin: 5px auto 10px;
+}
+#comm{
+	background-color: #FFF6E5;
+	color: #3E454C;
+	padding: 30px;
+	width: 55%;	
+	border-top-left-radius: 20px;
+	border-bottom-right-radius: 20px; 
+	margin: 30px auto;
+}
+.btn{
+	color: #DAEDE2;
+	background-color: #EA2E49;
+	border:1px solid #DAEDE2;
+}
+.btn:hover,.btn:active,.btn:focus{
+	color: #EA2E49;
+	background-color: #FFF6E5;
+	border:1px solid #EA2E49;
+}
+.nav-pills>li>a{
+	border-radius: 0px!important;
+	color: #ECF0F1;
+	font-size: 30px;
+}
+.nav-pills>li>a:hover,.nav-pills>li>a:active,.nav-pills>li>a:focus{
+	color: #EA2E49;
+	background-color: #DAEDE2;
+}
+
+/*
+=================Ajax Image=====
+ */
+#aj_container{
+	float: right;
+}
+
+
+/*
+=================SideBar=====
+ */
+ #parentBar{
+ 	position: fixed;
+ }
+ #sideBar{
+ 	background: #EA2E49;
+ 	width: 50px;
+ 	z-index: 10;
+ 	position: fixed;
+ 	left: 0px;
+ 	height: 600px;
+ 	overflow: hidden;
+ 	display: inline-block;
+    -webkit-transition:0.1s;
+    -moz-transition: 0.1s;
+    -o-transition: 0.1s;
+    transition: 0.1s;
+ }
+ #sideBar:hover{
+ 	background: #EA2E49;
+ 	width: 200px;
+ 	z-index: 10;
+ 	position: fixed;
+ 	height:100%;
+ 	display: inline-block;
+ }
+ .sideIcon{
+ 	width: 30px;
+ 	height: 30px;
+ 	margin-left: 10px;
+ 	display: inline-block;
+ 	margin-top: 5px;
+ }
+ #sideBar span{
+ 	color: #DAEDE2;
+ 	margin-top: 5px;
+ 	margin-left: 20px;
+ }
+ #sideSideBar{
+ 	margin-left: 50px;
+ }
+ #category_container{
+ 	width: 60%;
+ 	margin: auto;
+ }

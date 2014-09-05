@@ -27,6 +27,8 @@ exports.root = function(req,res){
 exports.pagination = function(req,res){
 	var totalPolls;
 	var pageNo = req.param('pageNo');
+	console.log('pageNo backend : '+pageNo);
+	console.log(typeof pageNo);
 	var limitValue = 3;
 	var toSkip = pageNo*limitValue;	
 	if(!pageNo)
