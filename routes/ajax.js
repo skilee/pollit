@@ -20,9 +20,9 @@ exports.edit = function(req,res){
 
 exports.login = function(req,res){
 	var username = req.body.username;
-	var password = req.body.password;	
+	var password = req.body.password;
 	db.collection('users').findOne({username:username},function(err,user){
-		if(!err){
+		if(user){
 			if(user!=null){
 				pass.hash(password,user.salt,function(err,hash){
 					if(user.hash == hash){						
@@ -31,8 +31,13 @@ exports.login = function(req,res){
 					}else{						
 						res.send('no');
 					}
-				});
+				});		
 			}
+		}else{
+				res.send('no2');
+				}
+		if (err) {
+			console.error(err);
 		}
 	});
 }

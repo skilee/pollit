@@ -1,5 +1,4 @@
-
-]	$(function(){
+$(function(){
 	function Poll(id,up,down){
 		this.id = id;
 		this.up = $('#up_'+id);

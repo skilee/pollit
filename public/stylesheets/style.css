@@ -166,3 +166,17 @@ li{
   color: #FFD75B;
   text-decoration: none;
 }
+
+#error h2{
+  text-align: center;
+  color:red;
+}
+
+#loginError{
+  color: red;
+  text-align: center;
+}
+#regError{
+  color: red;
+  text-align: center;
+}

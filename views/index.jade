@@ -25,17 +25,19 @@ html(lang='en')
 	title=title
 	body
 		#error
-			if error
-				h1 error
+			h2
 		//- #mask
 		//- 	br
 		//- 	br
-		//- 	img(src='/images/mask.gif')
-		//- 	| Pollit is loading now
+		//- 	img(src='/images/loading0.gif')
+			| Pollit is loading now
 		#login_modal.modal.fade.mdl(tab-index='-1', role='dialog', aria-labelledby='login', aria-hidden='true')
 			.modal-dialog
 				.modal-content
 					.modal-header
+						#loginError
+						#loading
+							img(src="/images/loading0.gif")
 						h4#login.modal-title Login
 					.modal-body
 						.input-group
@@ -52,6 +54,9 @@ html(lang='en')
 			.modal-dialog
 				.modal-content
 					.modal-header
+						#regError
+						#loadingReg
+							img(src="/images/loading0.gif")
 						h4#Register.modal-title Register
 					.modal-body
 						.input-group
@@ -63,7 +68,7 @@ html(lang='en')
 							input#regPassword.form-control(type='password')
 						br
 						.input-group
-							span.input-group-addon Confirm-Password
+							span.input-group-addon Confirm-<br>Password
 							input#regConPassword.form-control(type='password')
 						br
 						.input-group

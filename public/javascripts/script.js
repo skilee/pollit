@@ -2,14 +2,17 @@ $(document).ready(function(){
 	//======================
 	//		Ajax image
 	//======================
-var $loading = $('#aj').hide();
-$(document)
-  .ajaxStart(function () {
-    $loading.show();
-  })
-  .ajaxStop(function () {
-    $loading.hide();
-  });
+	var $loading = $('#loading').hide();
+	var $loading2= $('#loadingReg').hide();
+	$(document)
+	  .ajaxStart(function () {
+	    $loading.show();
+	    $loading2.show();
+	  })
+	  .ajaxStop(function () {
+	    $loading.hide();
+	    $loading2.hide();
+	  });
 
 
 	//======================
@@ -19,15 +22,23 @@ $(document)
 	$('#login_submit').click(function(){
 		var username = $('#username').val();
 		var password = $('#password').val();
-		var login={username:username,password:password};
-		$.post('/login',login,function(data){
-			if(data==='yes'){				
-				window.location.href = "/profile";
-			}else{				
-				window.location.href = "/"
-			}
-		});
+		if(username.length>=3&&password.length>=8){
+				var login={username:username,password:password};
+				$.post('/login',login,function(data){
+					if(data==='yes'){
+						window.location.href = "/profile";
+					}else if(data==='no2'){
+						//$('#login_modal').modal('hide');
+						$('#loginError').text('Username does not exist! Must REGISTER hurry!!');
+					}else{
+						//$('#login_modal').modal('hide');
+						$('#loginError').text('Password did not match');
+					}
+			});
+		}else{
+			$('#loginError').text('Something seems wrong!');
 
+		}
 	});
 
 
@@ -99,19 +110,49 @@ $(document)
 	// 			$('#passErr').text('Passwords do not match!').show();
 	// 		}
 	// 	});
+		function emailChecker(email){
+		    var x = email;
+		    var atpos = x.indexOf("@");
+		    var dotpos = x.lastIndexOf(".");
+		    if (atpos< 1 || dotpos<atpos+2 || dotpos+2>=x.length) {		     
+		        return false;
+    		}else{
+    			return true;
+    		}
+		}
 		var username = $('#regUsername').val();
 		var password = $('#regPassword').val();
 		var conPassword = $('#regConPassword').val();
 		var email = $('#email').val();
-		var register = {username:username,password:password,conPassword:conPassword,email:email};
-		$.post('/register',register,function(data){
-			if(data==='yes'){				
-				window.location.href = "/profile";
-			}else{				
-				window.location.href = "/"
+		var register = {
+							username:username,
+							password:password,
+							conPassword:conPassword,
+							email:email
+						};
+		if(username.length>=3){
+				if(password.length>=8){
+					if(password===conPassword){
+						if(emailChecker(email)){
+							$.post('/register',register,function(data){
+							if(data==='yes'){
+								window.location.href = "/profile";
+							}else{				
+								window.location.href = "/"
+							}
+						});
+						}else{
+						$('#regError').text('Something seems wrong with email!');
+						}						
+					}else{
+						$('#regError').text('Password and confirm password do not match!');
+					}			
+			}else{
+					$('#regError').text('Password should be atleast 8 characters long!');
 			}
-		});
-
+		}else{
+				$('#regError').text('username should be atleast 3 characters long');
+		}
 	});
 
 	
