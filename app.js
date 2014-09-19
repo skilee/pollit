@@ -185,6 +185,11 @@ app.get('/category',isLoggedIn,category.all);
 
 app.get('/category/:catName',isLoggedIn,category.this);
 
+app.get('/createCategory',isLoggedIn,category.create);
+
+app.post('/createCategory',isLoggedIn,category.saveCategory);
+
+app.get('/catSearch',isLoggedIn,category.ajSearch);
 
 //================================
 // API
@@ -203,6 +208,7 @@ app.get('/api',function(req,res){
 app.get('*',function(req,res){
 	res.send('What you playin at! With great power comes great responsibility <br><br><br><a href="/">Back!<a/>');
 });
+
 
 var server = app.listen(port,function(){
 	console.log('Listening on port %d',port);

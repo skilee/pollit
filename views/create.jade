@@ -5,15 +5,19 @@ block content
 			h3 Add a poll Question, it will be Yes & No type by default.
 			input(class="form-control",type='text',class="mar",name='question',placeholder="Poll Question",required)
 			input(class="form-control",type='text',class="mar",name='tags',placeholder="Tags Here,comma separated")
-			input(class="form-control",type="text",class="mar",value="Yes",name="option_0")
-			input(class="form-control",type="text",class="mar",value="No",name="option_1")
+			input(class="form-control",type="text",class="mar",value="Yes",name="option_0",placeholder="option 0")
+			input(class="form-control",type="text",class="mar",value="No",name="option_1",placeholder="option 1")
 			button(class="btn mar",title="more options",id="addMore") add more
 			input(name="optionNo",value="1" hidden="true",id="hidd")
 			br
-			-var categories = ['Science','Religion','Politics','Personal','Sports','Humor','Technology','Mathematics','Education','Internet','World']
-			select(name="category")
-				each category in categories
-					option(value=category)
-						= category
+			//- -var categories = ['Science','Religion','Politics','Personal','Sports','Humor','Technology','Mathematics','Education','Internet','World']
+			//- select(name="category")
+			//- 	each category in categories
+			//- 		option(value=category)
+			//- 			= category
+			input(placeholder="Add category",name="category",id="categorySearch")
+			#categorySelect
+			a(href="/createCategory")
+				button(type="button") create a new category
 			br
 			input(class="btn mar",type='Submit',value="Create")

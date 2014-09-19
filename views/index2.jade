@@ -10,90 +10,84 @@ html
 	script(type="text/javascript",src="/javascripts/analytic.js")
 	script(type="text/javascript",src="/javascripts/create.js")
 	script(type="text/javascript",src="/javascripts/sideBar.js")
+	script(type="text/javascript",src="/javascripts/category.js")
+	script(type="text/javascript",src="/javascripts/categoryPollCreate.js")
 	title=title
 	body
+				//- li(id="polls",class="bot_bor")
+				//- 	a(href="/polls") Polls
+				//- li(id="search",class="bot_bor")
+				//- 	input(class='form-control',placeholder="Search",id="search2",name="search")
+				//- 	div(id="results")
+				nav.row
+					.col-md-12
+						ul#navItems.col-md-12
+							li.col-md-2
+								a(href="/")
+									span.fa.fa-home
+									| Home
+							li.col-md-3
+									a(href="/create") 
+										span.fa.fa-home
+										| Create Poll
+							li.col-md-2
+								a(href="/profile") Profile
+							li.col-md-3
+									a(href="/mypolls") My Polls
+							li.col-md-2
+								a(href="/category") Category
+							li.col-md-2
+								#logout.tip(title='Leave?')
+										a(href="/logout") 
+											span.fa.fa-users
+											| Logout
 
-		//- nav
-		//- 	ul(class="nav nav-pills")
-		//- 		li(id="home",class="bot_bor")
-		//- 			a(href="/") Home
-		//- 		li(id="polls",class="bot_bor")
-		//- 			a(href="/polls") Polls
-		//- 		li(id="profile",class="bot_bor")
-		//- 			a(href="/profile") Profile
-		//- 		li(id="createpoll",class="bot_bor")
-		//- 			a(href="/create") Create Poll
-		//- 		li(id="mypoll",class="bot_bor")
-		//- 			a(href="/mypolls") My Polls					
-		//- 		li(class='bot_bor')
-		//- 			a(href="/category") Category
-		//- 		li(id="search",class="bot_bor")
-		//- 			input(class='form-control',placeholder="Search",id="search2",name="search")
-		//- 			div(id="results")
-		//- 		li(id="aj_container")
-		//- 			img(src="/images/load1.gif",id="aj")
-		//- 		li(id="logout")
-		//- 			a(href="/logout") Logout
 
-		div(id="sideBar")
-			a(href="/category",id="category")
-				img(src="/images/category.png",class="sideIcon")
-				span Category
-				div(id="sideSideBar")
-					a(href="/category/science")
-						img(src="/images/science.png",class="sideIcon")
-						span Science
-					a(href="/category/religion")
-						img(src="/images/religion.png",class="sideIcon")
-						span Religion
-					a(href="/category/politics")
-						img(src="/images/politics.png",class="sideIcon")
-						span Politics
-					a(href="/category/personal")
-						br
-						img(src="/images/personal.png",class="sideIcon")
-						span Personal
-					a(href="/category/sports")
+			//- div(id="sideBar")
+			//- 	a(href="/category",id="category")
+			//- 		img(src="/images/category.png",class="sideIcon")
+			//- 		span Category
+			//- 		div(id="sideSideBar")
+			//- 			a(href="/category/science")
+			//- 				img(src="/images/science.png",class="sideIcon")
+			//- 				span Science
+			//- 			a(href="/category/religion")
+			//- 				img(src="/images/religion.png",class="sideIcon")
+			//- 				span Religion
+			//- 			a(href="/category/politics")
+			//- 				img(src="/images/politics.png",class="sideIcon")
+			//- 				span Politics
+			//- 			a(href="/category/personal")
+			//- 				br
+			//- 				img(src="/images/personal.png",class="sideIcon")
+			//- 				span Personal
+			//- 			a(href="/category/sports")
 
-						img(src="/images/sports.svg",class="sideIcon")
-						span Sports
-					a(href="/category/Humor")
-						br
-						img(src="/images/humor.png",class="sideIcon")
-						span Humor
-					a(href="/category/technology")
-						br
-						img(src="/images/technology.png",class="sideIcon")
-						span Technology
-					a(href="/category/mathematics")
-						br
-						img(src="/images/mathematics.png",class="sideIcon")
-						span Mathematics
-					a(href="/category/education")
-						br
-						img(src="/images/education.png",class="sideIcon")
-						span Education
-					a(href="/category/Interent")
-						br
-						img(src="/images/internet.png",class="sideIcon")
-						span Internet
-					a(href="/category/world")
-						br
-						img(src="/images/world.png",class="sideIcon")
-						span World
-		.container
-			#head.row.col-sm-12.col-xs-12.col-md-12
-				#logo.col-sm-3.col-md-1.col-xs-4.col-md-offset-3
-					img(src='/images/1.jpg', width='100%')
-				#nav.col-sm-9.col-md-7.col-xs-8
-					#home.tip(title='Go Home')
-						a(href="/")
-							span.fa.fa-home
-							| Home
-					#log.tip(title='Login to your polls')
-						span.fa.fa-user
-						| Login
-					#reg.tip(title='Register to the world of polls')
-						span.fa.fa-users
-						| Register							
+			//- 				img(src="/images/sports.svg",class="sideIcon")
+			//- 				span Sports
+			//- 			a(href="/category/Humor")
+			//- 				br
+			//- 				img(src="/images/humor.png",class="sideIcon")
+			//- 				span Humor
+			//- 			a(href="/category/technology")
+			//- 				br
+			//- 				img(src="/images/technology.png",class="sideIcon")
+			//- 				span Technology
+			//- 			a(href="/category/mathematics")
+			//- 				br
+			//- 				img(src="/images/mathematics.png",class="sideIcon")
+			//- 				span Mathematics
+			//- 			a(href="/category/education")
+			//- 				br
+			//- 				img(src="/images/education.png",class="sideIcon")
+			//- 				span Education
+			//- 			a(href="/category/Interent")
+			//- 				br
+			//- 				img(src="/images/internet.png",class="sideIcon")
+			//- 				span Internet
+			//- 			a(href="/category/world")
+			//- 				br
+			//- 				img(src="/images/world.png",class="sideIcon")
+			//- 				span World
+									
 		block content

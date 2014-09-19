@@ -80,12 +80,21 @@ exports.postCreate = function(req,res){
 	for(var i=0;i<=number;i++){
 		req.body.votes.push(0);
 	}	
-	var category = req.body.dropDown;
+	var category = req.body.category;
+	if(category==''){
+		req.body.category = "disjoint";
+	}
 	req.body.tags = req.body.tags.toLowerCase().split(',');
-	var date=(new Date()).toJSON();
-	var username=req.session.user;
+	if(req.body.tags.length==1){
+		if(req.body.tags[0].length==0){
+			req.body.tags = req.body.question.split(' ');
+		}
+	}
+	var date = (new Date()).toJSON();
+	var username = req.session.user;
 	req.body.creator = username;
 	req.body.createdOn = date;
+	console.log(req.body);
 	db.collection('polls').insert(req.body,function(err,result){
 		if(err){
 			res.send(err);
@@ -93,8 +102,7 @@ exports.postCreate = function(req,res){
 		else{
 			res.redirect('/mypolls');
 		}
-		});
-	
+	});
 }
 
 exports.vote = function(req,res){

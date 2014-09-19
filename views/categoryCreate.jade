@@ -1,0 +1,10 @@
+extends index2
+block content
+	#categoryCreate
+		h2 Create Category
+		h4(id="error")
+		form(id="category",method="POST",action="/createCategory")
+			input(name="cName",placeholder="Category Name",id="cName")
+			input(name="cDescription",placeholder="Category Description",id="cDescription")
+			input(name="cTags",placeholder="Tags",id="cTags")
+			input(class="btn mar",type='Submit',value="Create")
